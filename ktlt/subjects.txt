@@ -1,0 +1,12 @@
+1|Ky thuat lap trinh
+2|Cau truc du lieu va giai thuat
+3|Lap trinh huong doi tuong
+4|Co so du lieu
+5|He dieu hanh
+6|Mang may tinh
+7|Toan roi rac
+8|Kien truc may tinh
+9|Nhap mon tri tue nhan tao
+10|Phan tich thiet ke he thong
+11|Cong nghe phan mem
+12|An toan thong tin co ban

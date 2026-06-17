@@ -1,0 +1,50 @@
+1|1|1|Lenh nao dung de re nhanh trong C++?|if|for|while|return|0
+2|1|1|Kieu du lieu nao thuong dung de luu so nguyen?|double|char|int|string|2
+3|1|1|Vong lap nao thuong dung khi biet truoc so lan lap?|for|if|switch|break|0
+4|1|1|Ham main trong C++ co vai tro gi?|Diem bat dau chuong trinh|Doc file|Xao tron mang|Tinh diem|0
+5|1|1|Mang mot chieu dung de luu gi?|Nhieu gia tri cung kieu|Mot ky tu|Mot file|Mot thu muc|0
+6|1|2|Con tro trong C++ luu thong tin nao?|Gia tri so thuc|Dia chi bien|Ten file|So dong code|1
+7|1|2|Tham chieu trong ham giup lam gi?|Truyen bien de ham co the thay doi gia tri goc|Xoa bien|Dong file|Dung vong lap|0
+8|1|2|Vi sao can kiem tra du lieu dau vao?|De tranh loi khi nguoi dung nhap sai|De tang kich thuoc file|De bo qua ket qua|De xoa cau hoi|0
+9|1|2|Ham getline dung de lam gi?|Doc ca dong chuoi|Sap xep mang|Tinh can bac hai|Tao so ngau nhien|0
+10|1|2|Thu vien ctime trong bai dung de lam gi?|Xu ly thoi gian lam bai|Ve giao dien|Doc ban phim|Luu vector|0
+11|2|1|Vector trong C++ co dac diem nao?|Kich thuoc co the thay doi|Chi luu mot phan tu|Khong the truy cap bang chi so|Chi luu chuoi|0
+12|2|1|Tim kiem tuyen tinh duyet du lieu nhu the nao?|Duyet lan luot tung phan tu|Chi kiem tra phan tu dau|Sap xep truoc khi tim|Xoa du lieu truoc khi tim|0
+13|2|1|Stack hoat dong theo nguyen tac nao?|FIFO|LIFO|Random|Tree|1
+14|2|1|Queue hoat dong theo nguyen tac nao?|LIFO|FIFO|Binary|Recursive|1
+15|2|1|Mang dung chi so bat dau thuong tu dau?|0|1|2|-1|0
+16|2|2|Do phuc tap xau nhat cua tim kiem tuyen tinh la gi?|O(1)|O(log n)|O(n)|O(n^2)|2
+17|2|2|Khi nao tim kiem nhi phan ap dung tot?|Du lieu da sap xep|Du lieu rong|Du lieu ngau nhien chua sap xep|Du lieu chi co chuoi|0
+18|2|2|Viec push_back trong vector dung de lam gi?|Them phan tu vao cuoi vector|Xoa tat ca phan tu|Sap xep vector|Doc file|0
+19|2|2|clear cua vector co tac dung gi?|Xoa cac phan tu trong vector|Tang kich thuoc file|Tao cau hoi|Tinh diem|0
+20|2|2|Truy cap vector bang chi so can chu y gi?|Chi so phai nam trong pham vi hop le|Chi so luon la so am|Chi so khong quan trong|Chi so phai la chuoi|0
+21|3|1|Class trong C++ dung de lam gi?|Mo ta kieu du lieu gom thuoc tinh va phuong thuc|Chi de in man hinh|Chi de doc file|Chi de xao tron|0
+22|3|1|Object la gi?|Doi tuong duoc tao tu class|Mot file text|Mot lenh lap|Mot bien toan cuc bat buoc|0
+23|3|1|Constructor thuong dung de lam gi?|Khoi tao doi tuong|Xoa chuong trinh|Tinh thoi gian|Sap xep file|0
+24|3|1|Tu khoa public co y nghia gi?|Thanh phan co the truy cap tu ben ngoai|Chi dung trong file|Cam truy cap|Dong chuong trinh|0
+25|3|1|Encapsulation la gi?|Dong goi du lieu va hanh vi|Xoa du lieu|Tach file bang dau gach dung|Nhap dap an|0
+26|3|2|Ke thua giup lap trinh vien lam gi?|Tai su dung va mo rong class co san|Xoa class cha|Bat buoc dung vector|Khong can ham main|0
+27|3|2|Da hinh cho phep dieu gi?|Cung giao dien nhung hanh vi khac nhau|Khong can bien|Khong can ham|Chi dung mot doi tuong|0
+28|3|2|Private thuong dung de lam gi?|An du lieu noi bo cua class|Mo het du lieu|In bao cao|Doc dap an|0
+29|3|2|Destructor duoc goi khi nao?|Khi doi tuong bi huy|Khi bat dau chuong trinh|Moi lan nhap so|Khi xao tron|0
+30|3|2|Nap chong ham nghia la gi?|Nhieu ham cung ten nhung khac tham so|Nhieu file cung ten|Nhieu vector rong|Nhieu dap an dung|0
+31|4|1|Bang trong co so du lieu dung de luu gi?|Du lieu theo hang va cot|Anh nen|Ma may|Thoi gian he thong|0
+32|4|1|Khoa chinh co vai tro gi?|Dinh danh duy nhat ban ghi|Luu mat khau|Xoa bang|Sap xep chuoi|0
+33|4|1|SQL la ngon ngu dung de lam gi?|Truy van va thao tac du lieu|Lap trinh game|Ve giao dien|Bien dich C++|0
+34|4|1|Lenh SELECT dung de lam gi?|Lay du lieu|Xoa chuong trinh|Tao vector|Tinh gio|0
+35|4|1|Lenh INSERT dung de lam gi?|Them ban ghi|Xoa ban ghi|Sua ban ghi|Doc ban phim|0
+36|4|2|Khoa ngoai dung de the hien dieu gi?|Moi quan he giua cac bang|So cau dung|Thoi gian thi|Dap an dung|0
+37|4|2|Chuan hoa du lieu nham muc dich gi?|Giam lap du lieu va tang tinh nhat quan|Tang loi nhap|Xoa moi khoa|Bo qua quan he|0
+38|4|2|Lenh JOIN dung khi nao?|Ket hop du lieu tu nhieu bang|Thoat chuong trinh|Nhap dap an|Xao tron cau hoi|0
+39|4|2|Chi muc index giup cai thien dieu gi?|Toc do tim kiem|So luong dap an|Ten file|Thoi gian hien tai|0
+40|4|2|Transaction giup dam bao dieu gi?|Tinh nhat quan khi thao tac du lieu|In man hinh dep hon|Tang so cau hoi|Giam so mon hoc|0
+41|5|1|He dieu hanh co vai tro gi?|Quan ly tai nguyen may tinh|Chi de soan van ban|Chi de luu dap an|Chi de ve anh|0
+42|5|1|Process la gi?|Chuong trinh dang duoc thuc thi|Mot cau hoi|Mot file ket qua|Mot bien int|0
+43|5|1|Thread la gi?|Luong thuc thi nho trong process|Mot mon hoc|Mot dap an|Mot ky tu|0
+44|5|1|Bo nho RAM dung de lam gi?|Luu tam du lieu dang xu ly|Luu vinh vien nhu o cung|In bao cao|Xoa CPU|0
+45|5|1|File system dung de lam gi?|Quan ly file va thu muc|Tinh diem|Xao tron vector|Nhap dap an|0
+46|5|2|Lap lich CPU dung de quyet dinh dieu gi?|Process nao duoc chay tiep theo|Dap an nao dung|Mon hoc nao bi xoa|File nao duoc in|0
+47|5|2|Deadlock la tinh huong nao?|Cac tien trinh cho nhau va khong tiep tuc duoc|CPU chay nhanh hon|File mo thanh cong|Nguoi dung nhap dung|0
+48|5|2|Bo nho ao giup dieu gi?|Mo rong khong gian dia chi logic|Xoa het RAM|Tang dap an dung|Rut gon cau hoi|0
+49|5|2|Semaphore dung de lam gi?|Dong bo cac tien trinh hoac thread|Doc file cau hoi|Tinh diem thi|Tao mon hoc|0
+50|5|2|Context switch la gi?|Chuyen CPU tu tien trinh nay sang tien trinh khac|Chuyen dap an A sang B|Doi ten file|Tinh diem trung binh|0
