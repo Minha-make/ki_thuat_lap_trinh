@@ -1,6 +1,43 @@
 #include "thi.h"
 
 #include "bao_cao.h"
+#include <conio.h>
+#include <windows.h>
+
+// Nhap dap an theo kieu khong chan chuong trinh, giup van kiem tra duoc het gio khi nguoi dung khong bam phim.
+// Tra ve true neu da nhap xong mot dap an; tra ve false neu het gio trong luc dang doi nhap.
+bool nhapDapAn(time_t batDau, int soPhut, int& dapAnDaChonTheoViTriHienThi) {
+    cout << "Nhap dap an A/B/C/D, bo trong neu khong tra loi: ";
+
+    while (!hetGio(batDau, soPhut)) {
+        if (!_kbhit()) {
+            Sleep(50);
+            continue;
+        }
+
+        int phim = _getch();
+
+        if (phim == '\r' || phim == '\n') {
+            cout << "\n";
+            dapAnDaChonTheoViTriHienThi = -1;
+            return true;
+        }
+
+        char c = static_cast<char>(phim);
+        if (c >= 'a' && c <= 'd') c = char(c - 'a' + 'A');
+
+        if (c >= 'A' && c <= 'D') {
+            cout << c << "\n";
+            dapAnDaChonTheoViTriHienThi = c - 'A';
+            return true;
+        }
+
+        cout << "\nDap an khong hop le. Chi duoc nhap A, B, C, D hoac Enter de bo qua.\n";
+        cout << "Nhap dap an A/B/C/D, bo trong neu khong tra loi: ";
+    }
+
+    return false;
+}
 
 // Tao mot cau hoi trong de thi tu cau hoi goc va xao tron thu tu dap an hien thi.
 void themCauHoiVaoDeThi(int chiSoCauHoi, vector<CauHoiThi>& deThi) {
@@ -82,33 +119,18 @@ void lamBaiThi(vector<CauHoiThi>& deThi, int soPhut, int& thoiGianLamBaiGiay) {
             cout << char('A' + j) << ". " << ch.dapAn[chiSoDapAn] << "\n";
         }
 
-        while (true) {
-            string traLoi;
-            cout << "Nhap dap an A/B/C/D, bo trong neu khong tra loi: ";
-            getline(cin, traLoi);
-            traLoi = catKhoangTrang(traLoi);
+        int dapAnHienThi = -1;
+        bool daNhapXong = nhapDapAn(batDau, soPhut, dapAnHienThi);
 
-            if (traLoi == "") {
-                deThi[i].dapAnDaChon = -1;
-                break;
-            }
-
-            if ((int)traLoi.length() != 1) {
-                cout << "Dap an khong hop le. Chi duoc nhap A, B, C, D hoac bo trong.\n";
-                continue;
-            }
-
-            char c = traLoi[0];
-            if (c >= 'a' && c <= 'd') c = char(c - 'a' + 'A');
-
-            if (c < 'A' || c > 'D') {
-                cout << "Dap an khong hop le. Chi duoc nhap A, B, C, D hoac bo trong.\n";
-                continue;
-            }
-
-            int dapAnHienThi = c - 'A';
-            deThi[i].dapAnDaChon = deThi[i].thuTuDapAn[dapAnHienThi];
+        if (!daNhapXong) {
+            cout << "\nDa het gio. He thong tu dong thu bai.\n";
             break;
+        }
+
+        if (dapAnHienThi == -1) {
+            deThi[i].dapAnDaChon = -1;
+        } else {
+            deThi[i].dapAnDaChon = deThi[i].thuTuDapAn[dapAnHienThi];
         }
     }
 

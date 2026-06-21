@@ -1,0 +1,1714 @@
+\documentclass[12pt,a4paper]{report}
+
+% --- 1. Goi ngon ngu va font chu ---
+\usepackage[utf8]{inputenc}
+\usepackage[vietnamese]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[table]{xcolor}
+\usepackage{tcolorbox}
+\definecolor{headergreen}{RGB}{0, 166, 81} 
+\definecolor{row1}{RGB}{248, 239, 226} % Màu be nhạt
+\definecolor{row2}{RGB}{238, 238, 238} % Màu xám nhạt
+\definecolor{codebg}{RGB}{248, 250, 252}
+\definecolor{codekeyword}{RGB}{0, 92, 175}
+\definecolor{codestring}{RGB}{163, 21, 21}
+\definecolor{codecomment}{RGB}{0, 128, 0}
+% --- 2. Định dạng lề trang ---
+\usepackage[left=2.5cm,right=2.5cm,top=2cm,bottom=2cm]{geometry}
+
+% --- 3. Hình ảnh và Bảng biểu ---
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage{seqsplit}
+\usepackage{longtable}
+\usepackage{amsmath,amssymb}
+
+\newcommand{\codecell}[1]{\texttt{#1}}
+\newcommand{\breakcode}[1]{\texttt{\seqsplit{#1}}}
+\newcommand{\centercell}[1]{\makecell[c]{#1}}
+
+% --- 4. Trình bày Code và Thuật toán ---
+\usepackage{listings}
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+\renewcommand{\algorithmcfname}{Thuật toán}
+
+\lstset{
+    backgroundcolor=\color{codebg},
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{codekeyword}\bfseries,
+    commentstyle=\color{codecomment}\itshape,
+    stringstyle=\color{codestring},
+    rulecolor=\color{headergreen},
+    numbers=left,
+    numberstyle=\tiny,
+    stepnumber=1,
+    numbersep=8pt,
+    frame=single,
+    breaklines=true,
+    columns=fullflexible,
+    literate=
+        {à}{{\`a}}1 {á}{{\'a}}1 {â}{{\^a}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {đ}{{\dj{}}}1 {ơ}{{\ohorn}}1 {ư}{{\uhorn}}1
+        {ạ}{{\d{a}}}1 {ả}{{\h{a}}}1 {ấ}{{\'{\^a}}}1 {ầ}{{\`{\^a}}}1 {ậ}{{\d{\^a}}}1
+        {ế}{{\'{\^e}}}1 {ể}{{\h{\^e}}}1 {ệ}{{\d{\^e}}}1 {ị}{{\d{i}}}1 {ỏ}{{\h{o}}}1
+        {ố}{{\'{\^o}}}1 {ổ}{{\h{\^o}}}1 {ỗ}{{\~{\^o}}}1 {ộ}{{\d{\^o}}}1
+        {ớ}{{\'{\ohorn}}}1 {ợ}{{\d{\ohorn}}}1 {ủ}{{\h{u}}}1 {ứ}{{\'{\uhorn}}}1 {ự}{{\d{\uhorn}}}1
+        {À}{{\`A}}1 {Ầ}{{\`{\^A}}}1 {Ổ}{{\h{\^O}}}1
+        {ã}{{\~a}}1 {ă}{{\u a}}1 {ắ}{{\'{\u a}}}1 {ằ}{{\`{\u a}}}1 {ặ}{{\d{\u a}}}1 {ẳ}{{\h{\u a}}}1 {ẵ}{{\~{\u a}}}1
+        {è}{{\`e}}1 {é}{{\'e}}1 {ê}{{\^e}}1 {ẽ}{{\~e}}1 {ẹ}{{\d{e}}}1
+        {ì}{{\`i}}1 {ĩ}{{\~i}}1 {ỉ}{{\h{i}}}1 {ò}{{\`o}}1 {ô}{{\^o}}1 {õ}{{\~o}}1 {ọ}{{\d{o}}}1
+        {ù}{{\`u}}1 {ú}{{\'u}}1 {ũ}{{\~u}}1 {ụ}{{\d{u}}}1 {ý}{{\'y}}1 {ỳ}{{\`y}}1 {ỷ}{{\h{y}}}1 {ỹ}{{\~y}}1 {ỵ}{{\d{y}}}1
+        {Đ}{{\DJ{}}}1 {Ô}{{\^O}}1 {Ư}{{\UHORN}}1
+        {Á}{{\'A}}1 {Ạ}{{\d{A}}}1 {Ả}{{\h{A}}}1 {Ã}{{\~A}}1 {Â}{{\^A}}1 {Ấ}{{\'{\^A}}}1 {Ậ}{{\d{\^A}}}1
+        {Ắ}{{\'{\u A}}}1 {Ằ}{{\`{\u A}}}1 {Ặ}{{\d{\u A}}}1 {Ẳ}{{\h{\u A}}}1 {Ẵ}{{\~{\u A}}}1
+        {É}{{\'E}}1 {È}{{\`E}}1 {Ẹ}{{\d{E}}}1 {Ẻ}{{\h{E}}}1 {Ẽ}{{\~E}}1 {Ê}{{\^E}}1 {Ế}{{\'{\^E}}}1 {Ề}{{\`{\^E}}}1 {Ệ}{{\d{\^E}}}1 {Ể}{{\h{\^E}}}1 {Ễ}{{\~{\^E}}}1
+        {Í}{{\'I}}1 {Ì}{{\`I}}1 {Ị}{{\d{I}}}1 {Ỉ}{{\h{I}}}1 {Ĩ}{{\~I}}1
+        {Ó}{{\'O}}1 {Ò}{{\`O}}1 {Ọ}{{\d{O}}}1 {Ỏ}{{\h{O}}}1 {Õ}{{\~O}}1 {Ố}{{\'{\^O}}}1 {Ồ}{{\`{\^O}}}1 {Ộ}{{\d{\^O}}}1 {Ổ}{{\h{\^O}}}1 {Ỗ}{{\~{\^O}}}1
+        {Ớ}{{\'{\OHORN}}}1 {Ờ}{{\`{\OHORN}}}1 {Ợ}{{\d{\OHORN}}}1 {Ở}{{\h{\OHORN}}}1 {Ỡ}{{\~{\OHORN}}}1
+        {Ú}{{\'U}}1 {Ù}{{\`U}}1 {Ụ}{{\d{U}}}1 {Ủ}{{\h{U}}}1 {Ũ}{{\~U}}1 {Ứ}{{\'{\UHORN}}}1 {Ừ}{{\`{\UHORN}}}1 {Ự}{{\d{\UHORN}}}1 {Ử}{{\h{\UHORN}}}1 {Ữ}{{\~{\UHORN}}}1
+        {Ý}{{\'Y}}1 {Ỳ}{{\`Y}}1 {Ỵ}{{\d{Y}}}1 {Ỷ}{{\h{Y}}}1 {Ỹ}{{\~Y}}1
+}
+
+\lstdefinestyle{cppstyle}{
+    language=C++,
+    backgroundcolor=\color{codebg},
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{codekeyword}\bfseries,
+    commentstyle=\color{codecomment}\itshape,
+    stringstyle=\color{codestring},
+    rulecolor=\color{headergreen},
+    numbers=left,
+    numberstyle=\tiny,
+    stepnumber=1,
+    numbersep=8pt,
+    frame=single,
+    breaklines=true,
+    columns=fullflexible
+}
+
+% --- 5. Header và Footer ---
+\usepackage{fancyhdr}
+\setlength{\headheight}{13.6pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Báo cáo nhóm 67}
+\fancyhead[R]{\small Kĩ thuật lập trình}
+\fancyfoot[C]{\thepage}
+
+% --- 6. Liên kết và Mục lục ---
+\usepackage[unicode]{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue}
+\usepackage{caption}
+\captionsetup{skip=8pt}
+\setlength{\floatsep}{16pt plus 2pt minus 2pt}
+\setlength{\textfloatsep}{16pt plus 2pt minus 2pt}
+\setlength{\intextsep}{16pt plus 2pt minus 2pt}
+\usepackage[export]{adjustbox}
+\usepackage{tikz} 
+\usetikzlibrary{calc,arrows.meta,positioning,shapes.geometric,fit} 
+\usepackage{indentfirst} 
+\renewcommand{\baselinestretch}{1.2} 
+\setlength{\emergencystretch}{3em}
+\hbadness=10000
+\hfuzz=100pt
+
+\usepackage{titlesec} 
+\usepackage{emptypage} % Gói để đánh số trang trên các trang trắng
+
+
+
+
+\titlespacing*{\paragraph}{0pt}{10pt}{0pt}  
+\titleformat*{\paragraph}{\fontsize{13pt}{0pt}\selectfont \bfseries \itshape}
+\begin{document}
+\hypersetup{pageanchor=false}
+
+% --- Trang bìa ---
+\begin{titlepage}
+
+\begin{tikzpicture}[overlay,remember picture] 
+\draw[line width=3pt]
+  ($ (current page.north west) + (2.0cm, -2.0cm) $) 
+rectangle
+($ (current page.south east) + (-2.0cm,2.0cm) $); 
+\draw [line width=0.5pt]
+($ (current page.north west) + (2.1cm, -2.1cm) $) 
+rectangle
+($ (current page.south east) + (-2.1cm,2.1cm) $);
+\end{tikzpicture}
+
+\begin{center}
+\vspace{-6pt} ĐẠI HỌC BÁCH KHOA HÀ NỘI \\
+\textbf{\fontsize{16pt}{0pt}\selectfont KHOA TOÁN - TIN}
+\vspace{0.5cm} 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=3.06cm, height=4.52cm]{logodhbk.png}
+\end{figure}
+
+\vspace{15pt}
+\textbf{\fontsize{26pt}{0pt}\selectfont BÁO CÁO CUỐI KÌ\\}
+\vspace{0.25cm}
+\textbf{\fontsize{18pt}{0pt}\selectfont MÔN HỌC: KĨ THUẬT LẬP TRÌNH}
+\end{center}
+
+\begin{center}
+\textbf{\fontsize{15pt}{0pt}\selectfont CHỦ ĐỀ: THI TRẮC NGHIỆM}\\ 
+\vspace{0.5cm}
+\textbf{\fontsize{15pt}{0pt}\selectfont NHÓM 67}\\ 
+
+\vspace{1.5cm}
+\begin{tabular}{@{}l l l@{}}
+    \fontsize{14pt}{0pt}\selectfont \textbf{Sinh viên thực hiện:} &
+    \fontsize{14pt}{0pt}\selectfont \textbf{Trần Tuấn Anh} &
+    \fontsize{14pt}{0pt}\selectfont \textbf{202418834}\\[0.2cm]
+    &
+    \fontsize{14pt}{0pt}\selectfont \textbf{Hoàng Việt Cường} &
+    \fontsize{14pt}{0pt}\selectfont \textbf{202418862}\\[0.2cm]
+    &
+    \fontsize{14pt}{0pt}\selectfont \textbf{Nguyễn Minh Hà} &
+    \fontsize{14pt}{0pt}\selectfont \textbf{202418890}\\[0.6cm]
+    \fontsize{14pt}{0pt}\selectfont \textbf{Giảng viên hướng dẫn:} &
+    \fontsize{14pt}{0pt}\selectfont \textbf{TS. Vũ Thành Nam} &
+\end{tabular}
+    
+    \vspace{4.5cm} 
+    \fontsize{14pt}{0pt}\selectfont Hà Nội, 6-2026
+\end{center}
+
+\end{titlepage}
+\hypersetup{pageanchor=true}
+
+% --- Nội dung báo cáo ---
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+\renewcommand{\thetable}{\arabic{table}}
+\renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\theequation}{\arabic{equation}}
+\makeatletter
+\@ifundefined{thelstlisting}{}{\renewcommand{\thelstlisting}{\arabic{lstlisting}}}
+\makeatother
+
+\tableofcontents
+\newpage
+
+\section*{Lời nói đầu}
+
+Trong quá trình học, nhóm em đã được tiếp cận những kiến thức cốt lõi để tạo nên một chương trình tốt như phương pháp lập trình có cấu trúc, kỹ năng debug tìm lỗi, tối ưu hóa mã nguồn, lập trình phòng ngừa,.... Để vận dụng những kiến thức lý thuyết này vào thực tiễn, nhóm đã quyết định lựa chọn đề tài: “Xây dựng chương trình thi trắc nghiệm bằng C++”.
+
+Chương trình được xây dựng dưới dạng ứng dụng giao diện dòng lệnh Console với các chức năng trọng tâm: thao tác đọc/ghi tệp tin, sinh đề và xáo trộn đáp án ngẫu nhiên, kiểm soát thời gian làm bài thực tế và tự động chấm điểm. Thông qua việc phát triển hệ thống này, nhóm có cơ hội thực hành trực tiếp các nguyên lý thiết kế, tổ chức mã nguồn và xử lý lỗi bài bản.
+
+Báo cáo dưới đây trình bày chi tiết quá trình phân tích, thiết kế và cài đặt chương trình. Do hạn chế về mặt thời gian và kinh nghiệm, sản phẩm khó tránh khỏi những thiếu sót nhất định. Nhóm rất mong nhận được sự góp ý quý báu từ thầy và các bạn nhằm tiếp tục hoàn thiện hơn.
+
+Cuối cùng, nhóm xin gửi lời cảm ơn chân thành và sâu sắc nhất đến TS. Vũ Thành Nam vì những bài giảng giá trị và hướng dẫn của thầy trong suốt quá trình môn học.
+
+\newpage
+\setcounter{section}{0}
+
+\section{Tổng quan}
+
+\subsection{Lý do chọn đề tài}
+
+Hiện nay, hình thức thi trắc nghiệm được sử dụng rộng rãi trong học tập nhờ khả năng đánh giá kiến thức nhanh chóng, khách quan và thuận tiện trong việc chấm điểm. Tuy nhiên, việc quản lý câu hỏi, tổ chức thi và lưu trữ kết quả bằng phương pháp thủ công vẫn tốn nhiều thời gian và dễ xảy ra sai sót.
+
+Vì vậy, nhóm lựa chọn đề tài “Xây dựng chương trình thi trắc nghiệm" đơn giản trên console nhằm hỗ trợ quản lý câu hỏi theo môn học, tạo đề thi ngẫu nhiên, chấm điểm tự động và lưu kết quả.
+
+\subsection{Mục tiêu}
+
+Mục tiêu cốt lõi của đề tài là xây dựng một chương trình hoạt động ổn định để hỗ trợ thi trắc nghiệm. Cụ thể, chương trình hướng tới các mục tiêu chi tiết sau:
+
+\begin{itemize}
+    \item \textbf{Đọc/ghi dữ liệu:} Đọc và ghi dữ liệu hệ thống thông qua các file text, giúp việc lưu trữ và truy xuất thông tin trở nên thuận tiện hơn.
+    \item \textbf{Quản lý ngân hàng câu hỏi :} Cho phép phân loại và lưu trữ câu hỏi rõ ràng theo từng môn học và mức độ phân hóa Dễ/Khó.
+    \item \textbf{Sinh đề thi ngẫu nhiên:} Áp dụng các thuật toán để sinh đề thi, xáo trộn cả thứ tự câu hỏi và vị trí các đáp án A, B, C, D cho mỗi lượt thi.
+    \item \textbf{Giới hạn thời gian làm bài:} Tính thời gian làm bài và tự động thu bài khi hết giờ.
+    \item \textbf{Lưu trữ và báo cáo} Tự động đối chiếu đáp án, tính điểm theo thang 10, lưu lịch sử làm bài và cung cấp báo cáo kết quả để theo dõi, tổng hợp.
+\end{itemize}
+
+\subsection{Phạm vi chương trình}
+
+Đề tài xây dựng hệ thống thi trắc nghiệm trên môi trường console bằng ngôn ngữ C++. Phạm vi triển khai của chương trình gồm các nội dung chính sau:
+
+\begin{itemize}
+    \item \textbf{Môi trường thực hiện:} Chương trình hoạt động trên giao diện dòng lệnh \textit{console} và được cài đặt bằng ngôn ngữ C++.
+    \item \textbf{Giới hạn về quản trị dữ liệu:} Chương trình chỉ cung cấp chức năng thêm mới đối với file câu hỏi. Dữ liệu về môn học, thí sinh và kết quả bị giới hạn ở việc đọc từ các tập tin cấu hình có sẵn, không hỗ trợ thêm, sửa, xóa trực tiếp từ menu chương trình.
+    \item \textbf{Giới hạn phạm vi:} Dữ liệu được quản lý thông qua các tệp văn bản; chương trình chưa triển khai cơ sở dữ liệu, giao diện đồ họa và chức năng thi trực tuyến.
+\end{itemize}
+
+\subsection{Ngôn ngữ lập trình sử dụng}
+
+Chương trình chính được cài đặt bằng ngôn ngữ C++ đồng thời sử dụng struct để định nghĩa nên các loại dữ liệu.\\
+Dữ liệu đầu vào và đầu ra được lưu trong thư mục \texttt{data}, gồm các file \texttt{data/subjects.txt}, \texttt{data/questions.txt}, \texttt{data/candidates.txt} và \texttt{data/results.txt}.
+
+\section{Phân công công việc}
+% Lưu ý: Bạn cần đảm bảo đã khai báo gói \usepackage{array} ở đầu file (trước \begin{document})
+\renewcommand{\arraystretch}{1.4}
+\begin{longtable}{|>{\centering\arraybackslash}m{0.14\textwidth}|>{\centering\arraybackslash}m{0.36\textwidth}|>{\raggedright\arraybackslash}m{0.37\textwidth}|}
+\caption{Bảng phân công công việc của nhóm}\label{tab:phan-cong}\\
+\hline
+\textbf{Thành viên} & \textbf{Phần code phụ trách} & \multicolumn{1}{>{\centering\arraybackslash}m{0.37\textwidth}|}{\textbf{Phần báo cáo phụ trách}} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Thành viên} & \textbf{Phần code phụ trách} & \multicolumn{1}{>{\centering\arraybackslash}m{0.37\textwidth}|}{\textbf{Phần báo cáo phụ trách}} \\
+\hline
+\endhead
+
+Thành viên 1 & 
+\makecell[c]{\codecell{tien\_ich.h/.cpp}\\ \codecell{du\_lieu.h/.cpp}\\ thư mục \texttt{data} \\[0.2cm]} & 
+Mô tả hàm tiện ích, cấu trúc dữ liệu, đọc/ghi file và tìm kiếm dữ liệu. \\
+\hline
+
+Thành viên 2 & 
+\makecell[c]{\codecell{ngan\_hang\_cau\_hoi.h}\\ \codecell{ngan\_hang\_cau\_hoi.cpp} \\[0.2cm]} & 
+Mô tả quản lý ngân hàng câu hỏi, thêm/xem câu hỏi và đếm câu hỏi dễ-khó. \\
+\hline
+
+Thành viên 3 & 
+\makecell[c]{\codecell{thi.h/.cpp}\\ \codecell{bao\_cao.h/.cpp}\\ \codecell{menu.h/.cpp}\\ \codecell{main.cpp} \\[0.3cm]} & 
+Mô tả sinh đề, làm bài, tính giờ, chấm điểm, báo cáo kết quả và menu. \\
+\hline
+\end{longtable}
+
+\section{Phân tích yêu cầu bài toán}
+
+\subsection{Yêu cầu chức năng}
+
+Chương trình cần xây dựng một hệ thống thi trắc nghiệm đơn giản trên giao diện dòng lệnh. Khi chạy chương trình, hệ thống hiển thị menu chính và cho phép người dùng chọn chức năng cho đến khi chọn thoát.
+
+Các nhóm chức năng chính của chương trình gồm:
+
+\begin{itemize}
+    \item \textbf{Quản lý ngân hàng câu hỏi}
+    \begin{itemize}
+        \item Xem danh sách môn học.
+        \item Xem danh sách câu hỏi theo từng môn học.
+        \item Thêm câu hỏi mới vào ngân hàng câu hỏi.
+        \item Mỗi câu hỏi gồm mã câu hỏi, mã môn học, mức độ, nội dung câu hỏi, bốn phương án trả lời và đáp án đúng.
+    \end{itemize}
+
+    \item \textbf{Thi trắc nghiệm}
+    \begin{itemize}
+        \item Chọn thí sinh dự thi.
+        \item Chọn môn học cần thi.
+        \item Nhập số lượng câu hỏi dễ và câu hỏi khó.
+        \item Nhập thời gian làm bài.
+        \item Sinh đề thi ngẫu nhiên từ ngân hàng câu hỏi.
+        \item Xáo trộn thứ tự câu hỏi và thứ tự đáp án.
+        \item Cho phép thí sinh nhập đáp án A/B/C/D hoặc bỏ trống.
+        \item Tự động ghi nhận thời gian làm bài và chấm điểm sau khi kết thúc.
+    \end{itemize}
+
+    \item \textbf{Báo cáo kết quả thi}
+    \begin{itemize}
+        \item Hiển thị danh sách kết quả các lần thi.
+        \item Tính điểm theo thang 10.
+        \item Thống kê số lần thi, điểm cao nhất, điểm thấp nhất và điểm trung bình.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Yêu cầu dữ liệu}
+
+Dữ liệu của chương trình được lưu lâu dài trong các file văn bản. Việc sử dụng file text giúp dữ liệu không bị mất sau khi chương trình kết thúc và có thể được đọc lại ở lần chạy tiếp theo.
+
+Chương trình sử dụng 4 file dữ liệu chính trong thư mục \texttt{data}:
+
+\begin{itemize}
+    \item \texttt{data/subjects.txt}: lưu danh sách môn học.
+    \item \texttt{data/questions.txt}: lưu ngân hàng câu hỏi.
+    \item \texttt{data/candidates.txt}: lưu danh sách thí sinh.
+    \item \texttt{data/results.txt}: lưu kết quả các lần thi.
+\end{itemize}
+
+Mỗi dòng trong file tương ứng với một bản ghi. Các trường dữ liệu trên cùng một dòng được phân tách bằng ký tự \texttt{|}.
+
+Cấu trúc dữ liệu của các file như sau:
+
+\begin{itemize}
+    \item \texttt{data/subjects.txt}
+    
+    \texttt{maMonHoc|tenMonHoc}
+
+    \item \texttt{data/questions.txt}
+    
+    {\raggedright \texttt{maCauHoi|}\allowbreak\texttt{maMonHoc|}\allowbreak\texttt{mucDo|}\allowbreak\texttt{noiDung|}\allowbreak\texttt{dapAnA|}\allowbreak\texttt{dapAnB|}\allowbreak\texttt{dapAnC|}\allowbreak\texttt{dapAnD|}\allowbreak\texttt{dapAnDung} \par}
+
+    \item \texttt{data/candidates.txt}
+    
+    \texttt{maThiSinh|hoTen}
+
+    \item \texttt{data/results.txt}
+    
+    {\raggedright \texttt{maKetQua|}\allowbreak\texttt{maThiSinh|}\allowbreak\texttt{maMonHoc|}\allowbreak\texttt{tongSoCau|}\allowbreak\texttt{soCauDung|}\allowbreak\texttt{thoiGianThi|}\allowbreak\texttt{thoiGianLamBaiGiay} \par}
+\end{itemize}
+
+Khi chương trình khởi động, dữ liệu từ các file được đọc vào các danh sách trong bộ nhớ bằng \texttt{vector}. Khi người dùng thêm câu hỏi mới, hoàn thành bài thi hoặc thoát chương trình, dữ liệu sẽ được ghi lại ra file để đảm bảo tính lưu trữ lâu dài.
+
+\subsection{Yêu cầu xử lý}
+
+Chương trình cần xử lý dữ liệu nhập từ bàn phím và dữ liệu đọc từ file một cách an toàn, tránh lỗi khi người dùng nhập sai kiểu dữ liệu hoặc nhập giá trị ngoài phạm vi cho phép.
+
+Các yêu cầu xử lý chính gồm:
+
+\begin{itemize}
+    \item Cắt khoảng trắng, ký tự xuống dòng hoặc tab ở đầu và cuối chuỗi.
+    \item Kiểm tra chuỗi nhập vào có phải là số nguyên không âm hay không.
+    \item Chuyển chuỗi số sang kiểu số để phục vụ tính toán.
+    \item Kiểm tra dữ liệu nhập nằm trong khoảng hợp lệ.
+    \item Không cho phép nhập chuỗi rỗng hoặc chứa ký tự \texttt{|}, vì đây là ký tự dùng để phân tách dữ liệu trong file.
+    \item Tách từng dòng dữ liệu trong file thành các trường thông tin.
+    \item Tìm kiếm môn học, thí sinh, câu hỏi theo mã bằng phương pháp tìm kiếm tuyến tính.
+    \item Sinh mã câu hỏi mới và mã kết quả mới bằng cách lấy mã lớn nhất hiện có cộng thêm 1.
+    \item Đếm số lượng câu hỏi theo môn học và theo mức độ dễ/khó.
+    \item Sinh đề thi ngẫu nhiên theo số lượng câu dễ và câu khó do người dùng nhập.
+    \item Xáo trộn thứ tự câu hỏi và thứ tự đáp án bằng thuật toán Fisher--Yates.
+    \item Kiểm tra thời gian làm bài để xác định thí sinh còn thời gian hay đã hết giờ.
+    \item Ghi nhận đáp án thí sinh đã chọn.
+    \item Đếm số câu trả lời đúng.
+    \item Tính điểm theo công thức:
+\end{itemize}
+
+\[
+    \text{Điểm} = \frac{\text{Số câu đúng} \times 10}{\text{Tổng số câu}}
+\]
+
+Nhờ các bước xử lý trên, chương trình có thể hạn chế lỗi nhập liệu, đảm bảo đề thi được sinh hợp lệ và kết quả thi được tính toán chính xác.
+
+\subsection{Yêu cầu báo cáo kết quả}
+
+Sau mỗi lần thi, chương trình tạo một mã kết quả mới và lưu lại các thông tin cần thiết của lần thi, bao gồm:
+
+\begin{itemize}
+    \item Mã kết quả.
+    \item Mã thí sinh.
+    \item Mã môn học.
+    \item Tổng số câu trong đề thi.
+    \item Số câu trả lời đúng.
+    \item Thời gian thi.
+    \item Thời gian làm bài tính bằng giây.
+\end{itemize}
+
+Các thông tin này được lưu vào file \texttt{data/results.txt}. Điểm số không được lưu trực tiếp trong file mà được tính lại khi cần hiển thị, dựa trên số câu đúng và tổng số câu.
+
+Khi người dùng chọn chức năng xem báo cáo, chương trình hiển thị danh sách kết quả thi dưới dạng bảng. Mỗi dòng thể hiện một lần thi, gồm mã kết quả, mã thí sinh, mã môn học, tổng số câu, số câu đúng, điểm, thời gian thi và thời gian làm bài.
+
+Ngoài bảng kết quả chi tiết, chương trình còn thực hiện thống kê tổng hợp gồm:
+
+\begin{itemize}
+    \item Tổng số lần thi.
+    \item Điểm cao nhất.
+    \item Điểm thấp nhất.
+    \item Điểm trung bình.
+\end{itemize}
+
+Phần báo cáo giúp người dùng theo dõi kết quả làm bài của các thí sinh, đánh giá chất lượng bài thi và có cái nhìn tổng quan về dữ liệu kết quả đã lưu trong hệ thống.
+
+\section{Thiết kế chương trình}
+
+\subsection{Mô hình tổng thể chương trình}
+
+Hệ thống được thiết kế theo kiến trúc mô-đun hóa nhằm tối ưu hóa quá trình quản lý, bảo trì và mở rộng mã nguồn. Trong đó, tệp \texttt{main.cpp} đảm nhiệm vai trò là điểm khởi chạy của chương trình. Các phân hệ còn lại được tách theo trách nhiệm riêng như \texttt{tien\_ich}, \texttt{du\_lieu}, \texttt{ngan\_hang\_cau\_hoi}, \texttt{thi}, \texttt{bao\_cao} và \texttt{menu}. Cách chia này giúp mỗi module tập trung vào một nhóm nghiệp vụ, dễ bảo trì và thuận tiện khi phân công công việc trong nhóm.
+Sơ đồ dưới đây mô tả tổng thể cách các thành phần chính của chương trình phối hợp với nhau. Người dùng thao tác qua giao diện console, menu chính điều hướng đến các nhóm chức năng, các hàm xử lý nghiệp vụ làm việc trên dữ liệu trong bộ nhớ và dữ liệu được lưu lâu dài trong các file text.
+
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{max totalsize={0.98\textwidth}{0.72\textheight},center}
+\begin{tikzpicture}[
+    font=\small,
+    node distance=1.2cm and 1.4cm,
+    box/.style={
+        rectangle,
+        draw=black,
+        rounded corners=2pt,
+        align=center,
+        minimum width=3.3cm,
+        minimum height=1cm,
+        fill=gray!8
+    },
+    mainbox/.style={
+        rectangle,
+        draw=black,
+        rounded corners=2pt,
+        align=center,
+        minimum width=3.8cm,
+        minimum height=1.1cm,
+        fill=blue!10
+    },
+    module/.style={
+        rectangle,
+        draw=black,
+        rounded corners=2pt,
+        align=center,
+        minimum width=3.7cm,
+        minimum height=1.2cm,
+        fill=green!10
+    },
+    data/.style={
+        rectangle,
+        draw=black,
+        rounded corners=2pt,
+        align=center,
+        text width=2.55cm,
+        minimum height=0.95cm,
+        font=\scriptsize,
+        fill=orange!15
+    },
+    arrow/.style={
+        -{Stealth[length=2.5mm]},
+        thick
+    },
+    group/.style={
+        rectangle,
+        draw=black!45,
+        dashed,
+        rounded corners=4pt,
+        inner sep=8pt
+    }
+]
+
+\node[mainbox] (user) {Người dùng\\thao tác trên console};
+\node[mainbox, below=of user] (menu) {Menu chính\\\texttt{menuChinh()}};
+
+\node[module, below left=1.5cm and 3.9cm of menu] (bank) {Ngân hàng câu hỏi\\xem/thêm câu hỏi\\đếm câu dễ/khó};
+\node[module, below=1.5cm of menu] (exam) {Thi trắc nghiệm\\cấu hình đề\\sinh đề, làm bài};
+\node[module, below right=1.5cm and 3.9cm of menu] (report) {Chấm điểm và báo cáo\\lưu kết quả\\xem nhiều lần thi};
+
+\node[box, below=1.6cm of exam] (memory) {Dữ liệu trong bộ nhớ\\\texttt{MonHoc[]}\\\texttt{CauHoi[]}\\\texttt{ThiSinh[]}\\\texttt{KetQuaThi[]}};
+
+\node[box, left=2.5cm of memory] (utility) {Hàm tiện ích\\nhập liệu\\tách chuỗi\\xáo trộn\\tính điểm};
+\node[box, right=2.5cm of memory] (fileio) {Đọc/ghi file\\\texttt{docDuLieu()}\\\texttt{ghiDuLieu()}};
+
+\node[data, below left=1.5cm and 3.2cm of memory] (subjects) {\texttt{data/subjects.txt}\\môn học};
+\node[data, below left=1.5cm and 0.7cm of memory] (questions) {\texttt{data/questions.txt}\\câu hỏi};
+\node[data, below right=1.5cm and 0.7cm of memory] (candidates) {\texttt{data/candidates.txt}\\thí sinh};
+\node[data, below right=1.5cm and 3.2cm of memory] (results) {\texttt{data/results.txt}\\kết quả};
+
+\draw[arrow] (user) -- (menu);
+\draw[arrow] (menu) -- (bank);
+\draw[arrow] (menu) -- (exam);
+\draw[arrow] (menu) -- (report);
+
+\draw[arrow] (bank) -- (memory);
+\draw[arrow] (exam) -- (memory);
+\draw[arrow] (report) -- (memory);
+
+\draw[arrow] (utility) -- (memory);
+\draw[arrow] (fileio) -- (memory);
+\draw[arrow] (memory) -- (fileio);
+
+\draw[arrow] (fileio) -- (subjects);
+\draw[arrow] (fileio) -- (questions);
+\draw[arrow] (fileio) -- (candidates);
+\draw[arrow] (fileio) -- (results);
+
+\node[group, fit=(user)(menu), label={[font=\bfseries]above:Tầng giao diện}] {};
+\node[group, fit=(bank)(exam)(report), label={[font=\bfseries]above:Tầng nghiệp vụ}] {};
+\node[group, fit=(utility)(memory)(fileio), label={[font=\bfseries]above:Tầng xử lý dữ liệu}] {};
+\node[group, fit=(subjects)(questions)(candidates)(results), label={[font=\bfseries]below:Tầng lưu trữ file text}] {};
+
+\end{tikzpicture}
+\end{adjustbox}
+\caption{Sơ đồ mô hình tổng thể của chương trình thi trắc nghiệm}
+\label{fig:mo-hinh-tong-the}
+\end{figure}
+
+Sơ đồ thể hiện chương trình theo bốn tầng: tầng giao diện tiếp nhận thao tác của người dùng; tầng nghiệp vụ xử lý các chức năng quản lý câu hỏi, tổ chức thi và báo cáo; tầng xử lý dữ liệu quản lý dữ liệu trong bộ nhớ và các hàm tiện ích; tầng lưu trữ gồm các file text dùng để lưu dữ liệu lâu dài.
+
+
+\subsection{Luồng hoạt động chính}
+
+Luồng hoạt động cơ bản của chương trình gồm các bước: đọc dữ liệu từ file, hiển thị menu chính, xử lý lựa chọn của người dùng, cập nhật dữ liệu nếu cần, ghi dữ liệu xuống file và kết thúc khi người dùng chọn thoát.
+
+Flow chart dưới đây mô tả luồng hoạt động chính của chương trình từ khi khởi động, đọc dữ liệu, hiển thị menu, thực hiện các chức năng chính, lưu dữ liệu và kết thúc chương trình.
+
+\begin{figure}[H]
+\centering
+\begin{adjustbox}{max totalsize={0.98\textwidth}{0.78\textheight},center}
+\begin{tikzpicture}[
+    font=\scriptsize,
+    node distance=0.95cm and 1.2cm,
+    startstop/.style={
+        ellipse,
+        draw=black,
+        align=center,
+        minimum width=2.7cm,
+        minimum height=0.75cm,
+        fill=gray!15
+    },
+    process/.style={
+        rectangle,
+        draw=black,
+        rounded corners=2pt,
+        align=center,
+        minimum width=3.3cm,
+        minimum height=0.8cm,
+        fill=blue!8
+    },
+    decision/.style={
+        diamond,
+        draw=black,
+        aspect=2.1,
+        align=center,
+        inner sep=1pt,
+        minimum width=3.0cm,
+        fill=yellow!18
+    },
+    subproc/.style={
+        rectangle,
+        draw=black,
+        rounded corners=2pt,
+        align=center,
+        minimum width=3.45cm,
+        minimum height=0.85cm,
+        fill=green!10
+    },
+    arrow/.style={
+        -{Stealth[length=2.2mm]},
+        thick
+    }
+]
+
+\node[startstop] (start) {Bắt đầu};
+\node[process, below=of start] (init) {Khởi tạo chương trình\\\texttt{srand()}};
+\node[process, below=of init] (read) {Đọc dữ liệu từ file\\\texttt{docDuLieu()}};
+\node[process, below=of read] (menu) {Hiển thị menu chính\\\texttt{menuChinh()}};
+\node[decision, below=of menu] (choice) {Người dùng\\chọn chức năng?};
+
+\node[subproc, left=3.8cm of choice] (bank) {Quản lý ngân hàng câu hỏi\\xem môn, xem câu hỏi, thêm câu hỏi};
+\node[process, below=of bank] (saveQuestion) {Cập nhật dữ liệu câu hỏi\\\texttt{ghiDuLieu()}};
+
+\node[subproc, below=1.75cm of choice] (config) {Cấu hình đề thi\\chọn thí sinh, môn, số câu dễ/khó, thời gian};
+\node[decision, below=of config] (enough) {Đủ câu hỏi\\để sinh đề?};
+\node[process, below=of enough] (createExam) {Sinh đề và xáo trộn\\\texttt{sinhDeThi()}};
+\node[process, below=of createExam] (doExam) {Làm bài và tính giờ\\\texttt{lamBaiThi()}};
+\node[process, below=of doExam] (score) {Chấm điểm\\\texttt{demCauDung()}};
+\node[process, below=of score] (saveResult) {Lưu kết quả thi\\\texttt{luuKetQua()}};
+
+\node[subproc, right=3.8cm of choice] (report) {Báo cáo kết quả\\xem nhiều lần thi, điểm cao nhất, thấp nhất, trung bình};
+
+\node[process, right=3.8cm of read] (saveAll) {Lưu dữ liệu\\\texttt{ghiDuLieu()}};
+\node[startstop, right=1.25cm of saveAll] (end) {Kết thúc};
+
+\draw[arrow] (start) -- (init);
+\draw[arrow] (init) -- (read);
+\draw[arrow] (read) -- (menu);
+\draw[arrow] (menu) -- (choice);
+
+\draw[arrow] (choice) -- node[above] {Chọn 1} (bank);
+\draw[arrow] (choice) -- node[right] {Chọn 2} (config);
+\draw[arrow] (choice) -- node[above] {Chọn 3} (report);
+\draw[arrow] (menu.east) -| node[pos=0.25, above] {Chọn 0} (saveAll.south);
+\draw[arrow] (saveAll) -- (end);
+
+\draw[arrow] (bank) -- (saveQuestion);
+\draw[arrow] (saveQuestion.south) |- ++(0,-0.45) -| (menu.west);
+
+\draw[arrow] (config) -- (enough);
+\draw[arrow] (enough) -- node[right] {Có} (createExam);
+\draw[arrow] (enough.east) -- ++(0.85,0) node[above] {Không} |- (menu.east);
+\draw[arrow] (createExam) -- (doExam);
+\draw[arrow] (doExam) -- (score);
+\draw[arrow] (score) -- (saveResult);
+\draw[arrow] (saveResult.west) -- ++(-1.1,0) |- (menu.west);
+
+\draw[arrow] (report.south) |- ++(0,-0.6) -| (menu.east);
+
+\end{tikzpicture}
+\end{adjustbox}
+\caption{Flow chart tổng quát của chương trình thi trắc nghiệm}
+\label{fig:flowchart-tong-quat}
+\end{figure}
+
+Flow chart cho thấy chương trình bắt đầu bằng việc khởi tạo và đọc dữ liệu từ file. Sau đó, menu chính điều hướng người dùng đến các nhóm chức năng: quản lý ngân hàng câu hỏi, tổ chức thi, xem báo cáo hoặc thoát chương trình. Sau khi hoàn thành từng chức năng, chương trình quay lại menu để tiếp tục xử lý cho đến khi người dùng chọn kết thúc.
+
+\subsection{Cấu trúc các file mã nguồn}
+
+\begin{longtable}{|>{\centering\arraybackslash}m{0.30\textwidth}|>{\raggedright\arraybackslash}m{0.60\textwidth}|}
+\caption{Cấu trúc các file mã nguồn}\label{tab:file-ma-nguon}\\
+\hline
+\textbf{File} & \multicolumn{1}{>{\centering\arraybackslash}m{0.60\textwidth}|}{\textbf{Vai trò}} \\
+\hline
+\endfirsthead
+\hline
+\textbf{File} & \multicolumn{1}{>{\centering\arraybackslash}m{0.60\textwidth}|}{\textbf{Vai trò}} \\
+\hline
+\endhead
+\codecell{main.cpp} & Điểm bắt đầu chương trình, khởi tạo sinh số ngẫu nhiên, gọi \codecell{docDuLieu()} và \codecell{menuChinh()}. \\
+\hline
+\codecell{tien\_ich.h/.cpp} & Hàm công cụ dùng chung: xử lý chuỗi, nhập liệu, tách dòng, lấy thời gian, xáo trộn Fisher-Yates và tính điểm. \\
+\hline
+\codecell{du\_lieu.h/.cpp} & Khai báo \codecell{struct}, vector toàn cục, đọc/ghi file text, tìm kiếm môn học/thí sinh/câu hỏi theo mã. \\
+\hline
+\codecell{ngan\_hang\_cau\_hoi.h/.cpp} & Xem danh sách môn học, xem câu hỏi theo môn, thêm câu hỏi, đếm câu hỏi dễ/khó. \\
+\hline
+\codecell{thi.h/.cpp} & Sinh đề thi, xáo trộn câu hỏi/đáp án, làm bài, kiểm tra thời gian và tự động thu bài. \\
+\hline
+\codecell{bao\_cao.h/.cpp} & Đếm câu đúng, sinh mã kết quả, lưu kết quả, hiển thị báo cáo nhiều lần thi. \\
+\hline
+\codecell{menu.h/.cpp} & Menu chính và điều hướng đến các chức năng của chương trình. \\
+\hline
+\end{longtable}
+
+\subsection{Cấu trúc thư mục project}
+
+\begin{lstlisting}[caption={Cấu trúc thư mục project}]
+project/
+|-- main.cpp
+|-- tien_ich.h/.cpp
+|-- du_lieu.h/.cpp
+|-- ngan_hang_cau_hoi.h/.cpp
+|-- thi.h/.cpp
+|-- bao_cao.h/.cpp
+|-- menu.h/.cpp
+`-- data/
+    |-- subjects.txt
+    |-- questions.txt
+    |-- candidates.txt
+    `-- results.txt
+\end{lstlisting}
+
+\subsection{Cấu trúc các file dữ liệu text}
+
+\begin{longtable}{|>{\centering\arraybackslash}m{0.24\textwidth}|>{\raggedright\arraybackslash}m{0.64\textwidth}|}
+\caption{Cấu trúc các file dữ liệu}\label{tab:file-du-lieu}\\
+\hline
+\textbf{File dữ liệu} & \multicolumn{1}{>{\centering\arraybackslash}m{0.64\textwidth}|}{\textbf{Định dạng lưu trữ}} \\
+\hline
+\endfirsthead
+\hline
+\textbf{File dữ liệu} & \multicolumn{1}{>{\centering\arraybackslash}m{0.64\textwidth}|}{\textbf{Định dạng lưu trữ}} \\
+\hline
+\endhead
+
+\codecell{data/subjects.txt} & 
+\breakcode{maMonHoc|tenMonHoc} \\
+\hline
+
+\codecell{data/questions.txt} & 
+\breakcode{maCauHoi|maMonHoc|mucDo|noiDung|dapAnA|dapAnB|dapAnC|dapAnD|dapAnDung} \\
+\hline
+
+\codecell{data/candidates.txt} & 
+\breakcode{maThiSinh|hoTen} \\
+\hline
+
+\codecell{data/results.txt} & 
+\breakcode{maKetQua|maThiSinh|maMonHoc|tongSoCau|soCauDung|thoiGianThi|thoiGianLamBaiGiay} \\
+\hline
+\end{longtable}
+
+\section{Thiết kế dữ liệu}
+
+
+\subsection{Các struct chính}
+
+Chương trình sử dụng các \texttt{struct} để biểu diễn dữ liệu chính. Các thuộc tính và vai trò của từng \texttt{struct} được trình bày trong bảng sau:
+
+\begin{longtable}{|>{\centering\arraybackslash}m{0.15\textwidth}|>{\centering\arraybackslash}m{0.32\textwidth}|>{\raggedright\arraybackslash}m{0.43\textwidth}|}
+\caption{Mô tả các struct chính trong chương trình}\label{tab:struct-chinh}\\
+\hline
+\textbf{Struct} & \textbf{Thuộc tính} & \multicolumn{1}{>{\centering\arraybackslash}m{0.43\textwidth}|}{\textbf{Vai trò}} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Struct} & \textbf{Thuộc tính} & \multicolumn{1}{>{\centering\arraybackslash}m{0.43\textwidth}|}{\textbf{Vai trò}} \\
+\hline
+\endhead
+
+\codecell{MonHoc} & 
+\codecell{maMonHoc}, \codecell{tenMonHoc} & 
+Lưu thông tin môn học, dùng để phân loại câu hỏi và chọn môn khi bắt đầu thi. \\
+\hline
+
+\codecell{CauHoi} & 
+\codecell{maCauHoi}, \codecell{maMonHoc}\newline
+\codecell{mucDo}, \codecell{noiDung}\newline
+\codecell{dapAn[4]}, \codecell{dapAnDung} & 
+Lưu toàn bộ thông tin của một câu hỏi trắc nghiệm. Trường \codecell{mucDo} nhận giá trị 1 cho câu dễ và 2 cho câu khó; \codecell{dapAnDung} lưu chỉ số đáp án đúng từ 0 đến 3. \\
+\hline
+
+\codecell{ThiSinh} & 
+\codecell{maThiSinh}, \codecell{hoTen} & 
+Lưu thông tin thí sinh để xác định người làm bài và gắn với kết quả thi. \\
+\hline
+
+\codecell{CauHoiThi} & 
+\codecell{cauHoi}, \codecell{thuTuDapAn[4]}\newline
+\codecell{dapAnDaChon} & 
+Lưu câu hỏi trong đề thi sau khi xáo trộn đáp án. Mảng thứ tự đáp án dùng để ánh xạ đáp án hiển thị về đáp án gốc khi chấm điểm. \\
+\hline
+
+\codecell{KetQuaThi} & 
+\codecell{maKetQua}, \codecell{maThiSinh}\newline
+\codecell{maMonHoc}, \codecell{tongSoCau}\newline
+\codecell{soCauDung}, \codecell{thoiGianThi}\newline
+\codecell{thoiGianLamBaiGiay} & 
+Lưu kết quả một lần thi: thí sinh, môn học, tổng số câu, số câu đúng, thời điểm thi và thời gian làm bài. \\
+\hline
+\end{longtable}
+
+\subsection{Danh sách dữ liệu}
+
+Các bản ghi được lưu trong các danh sách \texttt{vector}: \texttt{dsMonHoc}, \texttt{dsCauHoi}, \texttt{dsThiSinh} và \texttt{dsKetQua}. Khi bắt đầu chương trình, hàm \texttt{docDuLieu()} xóa dữ liệu cũ trong các danh sách rồi đọc lại từ file. Trong quá trình chạy, các chức năng thêm câu hỏi hoặc lưu kết quả sẽ cập nhật các danh sách này và gọi \texttt{ghiDuLieu()} để đồng bộ xuống file.
+
+\subsection{Mô tả định dạng lưu file}
+
+Các file dữ liệu được sử dụng có định dạng như sau:
+\begin{longtable}{|>{\centering\arraybackslash}m{0.24\textwidth}|>{\raggedright\arraybackslash}m{0.64\textwidth}|}
+\caption{Định dạng các file dữ liệu thực tế}\label{tab:file-du-lieu-thuc-te}\\
+\hline
+\textbf{File dữ liệu} & \multicolumn{1}{>{\centering\arraybackslash}m{0.64\textwidth}|}{\textbf{Định dạng mỗi dòng}} \\
+\hline
+\endfirsthead
+\hline
+\textbf{File dữ liệu} & \multicolumn{1}{>{\centering\arraybackslash}m{0.64\textwidth}|}{\textbf{Định dạng mỗi dòng}} \\
+\hline
+\endhead
+
+\codecell{data/subjects.txt} & 
+\breakcode{maMonHoc|tenMonHoc} \\
+\hline
+
+\codecell{data/questions.txt} & 
+\breakcode{maCauHoi|maMonHoc|mucDo|noiDung|dapAnA|dapAnB|dapAnC|dapAnD|dapAnDung} \\
+\hline
+
+\codecell{data/candidates.txt} & 
+\breakcode{maThiSinh|hoTen} \\
+\hline
+
+\codecell{data/results.txt} & 
+\breakcode{maKetQua|maThiSinh|maMonHoc|tongSoCau|soCauDung|thoiGianThi|thoiGianLamBaiGiay} \\
+\hline
+\end{longtable}
+
+Trong đó, \texttt{mucDo} nhận giá trị 1 hoặc 2, tương ứng câu dễ hoặc câu khó. Trường \texttt{dapAnDung} trong file câu hỏi được lưu dưới dạng số, tương ứng vị trí đáp án đúng từ 0 đến 3 trong mảng đáp án của chương trình.
+
+
+
+\section{Sơ đồ phân rã chức năng}
+
+Sơ đồ phân rã chức năng thể hiện chương trình thi trắc nghiệm được chia thành các nhóm chức năng chính và các chức năng con tương ứng.
+
+\begin{figure}[H]
+    \centering
+    \begin{adjustbox}{max totalsize={0.98\textwidth}{0.72\textheight},center}
+    \begin{tikzpicture}[
+        boxroot/.style={rectangle, draw=headergreen, line width=1pt, rounded corners, fill=headergreen!15, align=center, text width=5cm, minimum height=0.9cm, font=\bfseries},
+        boxgroup/.style={rectangle, draw=blue!60!black, rounded corners, fill=blue!8, align=center, text width=3.1cm, minimum height=0.8cm, font=\small\bfseries},
+        boxleaf/.style={rectangle, draw=black!55, rounded corners, fill=row1, align=center, text width=3.1cm, minimum height=0.62cm, font=\scriptsize},
+        arrow/.style={draw=black!65, -latex, line width=0.5pt}
+    ]
+        \node[boxroot] (root) at (0,0) {Chương trình thi trắc nghiệm};
+
+        \node[boxgroup] (data) at (-6,-1.8) {Quản lý dữ liệu};
+        \node[boxgroup] (bank) at (-2,-1.8) {Ngân hàng câu hỏi};
+        \node[boxgroup] (exam) at (2,-1.8) {Tổ chức thi};
+        \node[boxgroup] (report) at (6,-1.8) {Báo cáo kết quả};
+
+        \draw[arrow] (root.south) -- (data.north);
+        \draw[arrow] (root.south) -- (bank.north);
+        \draw[arrow] (root.south) -- (exam.north);
+        \draw[arrow] (root.south) -- (report.north);
+
+        \node[boxleaf] (data1) at (-6,-3.2) {Đọc dữ liệu từ file};
+        \node[boxleaf] (data2) at (-6,-4.1) {Ghi dữ liệu ra file};
+        \node[boxleaf] (data3) at (-6,-5.0) {Tìm kiếm theo mã};
+        \draw[arrow] (data.south) -- (data1.north);
+        \draw[arrow] (data1.south) -- (data2.north);
+        \draw[arrow] (data2.south) -- (data3.north);
+
+        \node[boxleaf] (bank1) at (-2,-3.2) {Hiển thị môn học};
+        \node[boxleaf] (bank2) at (-2,-4.1) {Xem câu hỏi theo môn};
+        \node[boxleaf] (bank3) at (-2,-5.0) {Thêm câu hỏi mới};
+        \node[boxleaf] (bank4) at (-2,-5.9) {Đếm câu dễ/khó};
+        \draw[arrow] (bank.south) -- (bank1.north);
+        \draw[arrow] (bank1.south) -- (bank2.north);
+        \draw[arrow] (bank2.south) -- (bank3.north);
+        \draw[arrow] (bank3.south) -- (bank4.north);
+
+        \node[boxleaf] (exam1) at (2,-3.2) {Chọn thí sinh, môn học};
+        \node[boxleaf] (exam2) at (2,-4.1) {Cấu hình số câu dễ/khó};
+        \node[boxleaf] (exam3) at (2,-5.0) {Sinh đề ngẫu nhiên};
+        \node[boxleaf] (exam4) at (2,-5.9) {Làm bài và tính giờ};
+        \node[boxleaf] (exam5) at (2,-6.8) {Chấm điểm tự động};
+        \draw[arrow] (exam.south) -- (exam1.north);
+        \draw[arrow] (exam1.south) -- (exam2.north);
+        \draw[arrow] (exam2.south) -- (exam3.north);
+        \draw[arrow] (exam3.south) -- (exam4.north);
+        \draw[arrow] (exam4.south) -- (exam5.north);
+
+        \node[boxleaf] (report1) at (6,-3.2) {Lưu kết quả thi};
+        \node[boxleaf] (report2) at (6,-4.1) {Tính điểm thang 10};
+        \node[boxleaf] (report3) at (6,-5.0) {Hiển thị bảng kết quả};
+        \draw[arrow] (report.south) -- (report1.north);
+        \draw[arrow] (report1.south) -- (report2.north);
+        \draw[arrow] (report2.south) -- (report3.north);
+    \end{tikzpicture}
+    \end{adjustbox}
+    \caption{Sơ đồ phân rã chức năng của chương trình}
+    \label{fig:so-do-phan-ra-chuc-nang}
+\end{figure}
+
+Từ sơ đồ trên, chương trình được tổ chức thành bốn nhóm chức năng chính. Nhóm quản lý dữ liệu chịu trách nhiệm đọc, ghi và tìm kiếm dữ liệu trong các file text. Nhóm ngân hàng câu hỏi hỗ trợ xem môn học, xem câu hỏi, thêm câu hỏi và thống kê số lượng câu hỏi theo mức độ. Nhóm tổ chức thi phụ trách cấu hình đề, sinh đề, làm bài, tính giờ và chấm điểm. Nhóm báo cáo kết quả lưu lại lần thi và hiển thị điểm số cho người dùng.
+
+\section{Các thuật toán chính sử dụng}
+
+\subsection{Thuật toán đọc và ghi file text}
+
+Hàm \texttt{docDuLieu()} đọc dữ liệu từ các file trong thư mục \texttt{data}, gồm \texttt{data/subjects.txt}, \texttt{data/questions.txt}, \texttt{data/candidates.txt} và \texttt{data/results.txt}. Dữ liệu sau khi đọc được đưa vào các danh sách \texttt{vector}. Khi có thay đổi, hàm \texttt{ghiDuLieu()} ghi lại dữ liệu từ các \texttt{vector} về các file tương ứng trong thư mục \texttt{data}. Mỗi dòng trong file là một bản ghi, các trường được phân tách bằng ký tự \texttt{|}. Chương trình đọc từng dòng bằng \texttt{getline()}, tách dòng thành các trường bằng hàm \texttt{tachDong()}, kiểm tra dữ liệu số nếu cần, sau đó tạo đối tượng \texttt{struct} tương ứng và đưa vào \texttt{vector}.
+
+Khi dữ liệu thay đổi hoặc khi thoát chương trình, hàm \texttt{ghiDuLieu()} ghi lại toàn bộ dữ liệu từ các \texttt{vector} ra file text. Mỗi phần tử trong \texttt{vector} được ghi thành một dòng, các trường được nối với nhau bằng ký tự \texttt{|}. Cách làm này giúp dữ liệu dễ quan sát, dễ chỉnh sửa thủ công và phù hợp với phạm vi bài tập ở mức console.
+
+\begin{center}
+\texttt{File text} $\rightarrow$ \texttt{docDuLieu()} $\rightarrow$ \texttt{vector} $\rightarrow$ xử lý nghiệp vụ $\rightarrow$ \texttt{ghiDuLieu()} $\rightarrow$ \texttt{File text}
+\end{center}
+
+
+\subsection{Thuật toán tìm kiếm theo mã}
+
+Trong chương trình, các đối tượng như môn học, thí sinh và câu hỏi đều có mã định danh riêng. Vì dữ liệu mẫu có quy mô vừa phải và được lưu trong các danh sách \texttt{vector}, chương trình sử dụng thuật toán tìm kiếm tuyến tính để tìm phần tử theo mã.
+
+Các hàm áp dụng thuật toán này gồm:
+
+\begin{itemize}
+    \item \texttt{timMonHoc(maMonHoc)}: tìm môn học theo mã môn học.
+    \item \texttt{timThiSinh(maThiSinh)}: tìm thí sinh theo mã thí sinh.
+    \item \texttt{timCauHoi(maCauHoi)}: tìm câu hỏi theo mã câu hỏi.
+\end{itemize}
+
+Mô tả thuật toán:
+
+\begin{enumerate}
+    \item Duyệt từng phần tử trong \texttt{vector}.
+    \item So sánh mã của phần tử hiện tại với mã cần tìm.
+    \item Nếu trùng mã, trả về vị trí hiện tại.
+    \item Nếu duyệt hết danh sách mà không có mã nào trùng, trả về \texttt{-1}.
+\end{enumerate}
+
+\subsection{Thuật toán sinh mã mới}
+
+Trong chương trình, một số dữ liệu cần có mã định danh riêng, ví dụ mã câu hỏi và mã kết quả thi.
+
+Thuật toán này được áp dụng trong các hàm:
+
+\begin{itemize}
+    \item \texttt{sinhMaCauHoiMoi()}: sinh mã cho câu hỏi mới.
+    \item \texttt{sinhMaKetQuaMoi()}: sinh mã cho kết quả thi mới.
+\end{itemize}
+
+Mô tả thuật toán:
+
+\begin{enumerate}
+    \item Khởi tạo biến \texttt{maLonNhat = 0}.
+    \item Duyệt lần lượt từng phần tử trong danh sách.
+    \item Nếu mã của phần tử hiện tại lớn hơn \texttt{maLonNhat}, cập nhật \texttt{maLonNhat}.
+    \item Sau khi duyệt xong, mã mới được tính bằng \texttt{maLonNhat + 1}.
+\end{enumerate}
+
+\subsection{Thuật toán xáo trộn Fisher-Yates}
+
+Trong chương trình, thuật toán Fisher-Yates được sử dụng để xáo trộn thứ tự câu hỏi trong đề thi và xáo trộn thứ tự đáp án trong từng câu hỏi.
+
+Mô tả thuật toán:
+
+\begin{enumerate}
+    \item Xét danh sách có \texttt{n} phần tử.
+    \item Duyệt biến \texttt{i} từ \texttt{n - 1} về \texttt{1}.
+    \item Sinh ngẫu nhiên chỉ số \texttt{j} trong khoảng từ \texttt{0} đến \texttt{i}.
+    \item Hoán đổi phần tử tại vị trí \texttt{i} và vị trí \texttt{j}.
+    \item Sau khi vòng lặp kết thúc, danh sách đã được xáo trộn.
+\end{enumerate}
+
+Trong code, thuật toán này được cài đặt trong hàm \texttt{xaoTronVectorSoNguyen()}:
+
+\begin{lstlisting}[style=cppstyle, caption={Xáo trộn vector bằng Fisher-Yates}]
+void xaoTronVectorSoNguyen(vector<int>& a) {
+    for (int i = static_cast<int>(a.size()) - 1; i > 0; i--) {
+        int j = rand() % (i + 1);
+        int tam = a[i];
+        a[i] = a[j];
+        a[j] = tam;
+    }
+}
+\end{lstlisting}
+
+Hàm này được dùng trong hai trường hợp chính:
+
+\begin{itemize}
+    \item Xáo trộn danh sách chỉ số câu hỏi khi sinh đề thi.
+    \item Xáo trộn thứ tự 4 đáp án của mỗi câu hỏi trong đề thi.
+\end{itemize}
+
+\subsection{Thuật toán sinh đề thi}
+
+Thuật toán sinh đề thi được sử dụng để tạo một đề thi từ ngân hàng câu hỏi dựa trên môn học, số câu dễ và số câu khó do người dùng cấu hình. Trong chương trình, thuật toán này được cài đặt chủ yếu thông qua các hàm \texttt{sinhDeThi()}, \texttt{themCauHoiTheoLoaiVaoDe()} và \texttt{themCauHoiVaoDeThi()}.
+
+Mô tả thuật toán:
+
+\begin{enumerate}
+    \item Người dùng chọn môn học cần thi.
+    \item Chương trình đếm số câu dễ và số câu khó hiện có của môn học đó.
+    \item Người dùng nhập số câu dễ, số câu khó và thời gian làm bài.
+    \item Chương trình lọc các câu hỏi đúng môn học và đúng mức độ.
+    \item Với từng nhóm câu dễ và câu khó, chương trình xáo trộn danh sách câu hỏi bằng thuật toán Fisher-Yates.
+    \item Lấy đúng số lượng câu hỏi cần thiết từ từng nhóm và đưa vào đề thi.
+    \item Với mỗi câu hỏi được đưa vào đề, chương trình xáo trộn thứ tự 4 đáp án.
+    \item Sau khi đủ số câu, chương trình tiếp tục xáo trộn thứ tự toàn bộ câu hỏi trong đề.
+\end{enumerate}
+
+Kết quả của thuật toán là một danh sách \texttt{vector<CauHoiThi>} chứa các câu hỏi của đề thi. Mỗi phần tử trong danh sách lưu mã câu hỏi, thứ tự đáp án sau khi xáo trộn và đáp án mà thí sinh đã chọn.
+
+Trong chương trình, hàm \texttt{sinhDeThi()} có vai trò điều phối quá trình sinh đề:
+
+\begin{lstlisting}[style=cppstyle, caption={Hàm sinh đề thi}]
+void sinhDeThi(int maMonHoc, int soCauDe, int soCauKho, vector<CauHoiThi>& deThi) {
+    themCauHoiTheoLoaiVaoDe(maMonHoc, 1, soCauDe, deThi);
+    themCauHoiTheoLoaiVaoDe(maMonHoc, 2, soCauKho, deThi);
+
+    vector<int> thuTuCauHoi;
+    for (int i = 0; i < static_cast<int>(deThi.size()); i++) {
+        thuTuCauHoi.push_back(i);
+    }
+
+    xaoTronVectorSoNguyen(thuTuCauHoi);
+
+    vector<CauHoiThi> deThiDaXaoTron;
+    for (int i = 0; i < static_cast<int>(deThi.size()); i++) {
+        deThiDaXaoTron.push_back(deThi[thuTuCauHoi[i]]);
+    }
+
+    deThi = deThiDaXaoTron;
+}
+\end{lstlisting}
+
+\subsection{Thuật toán kiểm tra thời gian làm bài}
+
+Chương trình có chức năng tính thời gian làm bài và tự động thu bài khi hết giờ. Chức năng này được cài đặt chủ yếu thông qua hai hàm \texttt{hetGio()} và \texttt{lamBaiThi()}.
+
+Mô tả thuật toán:
+
+\begin{enumerate}
+    \item Khi bắt đầu làm bài, lưu thời điểm bắt đầu vào biến \texttt{batDau}.
+    \item Với mỗi câu hỏi trong đề thi, gọi hàm \texttt{hetGio()} để kiểm tra thời gian.
+    \item Trong hàm \texttt{hetGio()}, tính thời gian đã trôi qua bằng \texttt{difftime(time(NULL), batDau)}.
+    \item So sánh thời gian đã trôi qua với giới hạn \texttt{soPhut * 60}.
+    \item Nếu chưa hết giờ, tiếp tục cho thí sinh trả lời câu hỏi.
+    \item Nếu đã hết giờ, thông báo hết giờ và thoát khỏi vòng lặp làm bài.
+    \item Sau khi kết thúc, tính tổng thời gian làm bài thực tế để lưu vào kết quả thi.
+\end{enumerate}
+
+Đoạn code kiểm tra hết giờ:
+
+\begin{lstlisting}[style=cppstyle, caption={Hàm kiểm tra hết giờ}]
+bool hetGio(time_t batDau, int soPhut) {
+    return difftime(time(NULL), batDau) >= soPhut * 60;
+}
+\end{lstlisting}
+
+Đoạn code sử dụng kiểm tra thời gian trong quá trình làm bài:
+
+\begin{lstlisting}[style=cppstyle, caption={Kiểm tra thời gian khi làm bài}]
+time_t batDau = time(NULL);
+
+for (int i = 0; i < static_cast<int>(deThi.size()); i++) {
+    if (hetGio(batDau, soPhut)) {
+        cout << "\nDa het gio. He thong tu dong thu bai.\n";
+        break;
+    }
+
+    // Hien thi cau hoi va nhan dap an cua thi sinh
+}
+
+thoiGianLamBaiGiay = (int)difftime(time(NULL), batDau);
+\end{lstlisting}
+
+Thuật toán này giúp chương trình kiểm soát thời gian làm bài ở mức cơ bản. Khi hết thời gian, các câu chưa trả lời sẽ được giữ ở trạng thái chưa chọn đáp án và chương trình chuyển sang bước chấm điểm.
+
+
+\subsection{Thuật toán chấm điểm tự động}
+
+Sau khi thí sinh hoàn thành bài thi hoặc hết thời gian làm bài, chương trình tự động chấm điểm dựa trên số câu trả lời đúng. Thuật toán chấm điểm được thực hiện qua hai bước chính: đếm số câu đúng và tính điểm theo thang điểm 10.
+
+Mô tả thuật toán:
+
+\begin{enumerate}
+    \item Duyệt lần lượt từng câu hỏi trong đề thi.
+    \item Tìm câu hỏi gốc trong ngân hàng câu hỏi dựa trên mã câu hỏi.
+    \item So sánh đáp án thí sinh đã chọn với đáp án đúng của câu hỏi gốc.
+    \item Nếu hai đáp án trùng nhau, tăng biến đếm số câu đúng.
+    \item Sau khi duyệt hết đề thi, tính điểm theo công thức:
+    \[
+        \text{Điểm} = \frac{\text{Số câu đúng} \times 10}{\text{Tổng số câu}}
+    \]
+    \item Lưu kết quả gồm mã thí sinh, mã môn học, tổng số câu, số câu đúng, thời gian thi và thời gian làm bài.
+\end{enumerate}
+
+Đoạn code đếm số câu đúng:
+
+\begin{lstlisting}[style=cppstyle, caption={Hàm đếm số câu trả lời đúng}]
+int demCauDung(vector<CauHoiThi>& deThi) {
+    int dem = 0;
+    for (int i = 0; i < static_cast<int>(deThi.size()); i++) {
+        int viTri = timCauHoi(deThi[i].maCauHoi);
+        if (viTri != -1 && deThi[i].dapAnDaChon == dsCauHoi[viTri].dapAnDung) {
+            dem++;
+        }
+    }
+    return dem;
+}
+\end{lstlisting}
+
+Đoạn code tính điểm:
+
+\begin{lstlisting}[style=cppstyle, caption={Hàm tính điểm theo thang 10}]
+double tinhDiem(int soCauDung, int tongSoCau) {
+    if (tongSoCau <= 0) {
+        return 0;
+    }
+    return (double)soCauDung * 10.0 / tongSoCau;
+}
+\end{lstlisting}
+
+\section{Kiểm thử chương trình}
+
+\subsection{Mục tiêu kiểm thử}
+
+Mục tiêu kiểm thử là đánh giá chương trình có thực hiện đúng các chức năng cốt lõi của hệ thống thi trắc nghiệm hay không. Các nội dung chính cần kiểm tra gồm đọc/ghi dữ liệu từ file text, quản lý ngân hàng câu hỏi, sinh đề, làm bài, chấm điểm, lưu kết quả và hiển thị báo cáo.
+
+Ngoài ra, nhóm cũng kiểm tra khả năng xử lý dữ liệu nhập sai, các điều kiện biên khi cấu hình đề thi và việc liên kết giữa các module sau khi tách chương trình thành nhiều file. Một số hàm xử lý ít phụ thuộc giao diện console được kiểm tra thêm bằng unit test tự động trong file \texttt{test.cpp}.
+
+\subsection{Phương pháp kiểm thử áp dụng}
+
+Nhóm áp dụng kết hợp nhiều phương pháp kiểm thử ở mức phù hợp với bài tập đại học:
+
+\begin{itemize}
+    \item \textbf{Kiểm thử tăng dần:} Kiểm thử từ các hàm nhỏ đến từng module, sau đó kiểm thử toàn bộ luồng chương trình. Thứ tự kiểm thử cơ bản là: hàm tiện ích $\rightarrow$ module dữ liệu $\rightarrow$ module ngân hàng câu hỏi $\rightarrow$ module thi $\rightarrow$ module báo cáo $\rightarrow$ toàn chương trình.
+    \item \textbf{Kiểm thử hộp đen:} Người kiểm thử nhập dữ liệu qua giao diện console và quan sát kết quả hiển thị. Cách này được dùng cho các chức năng như thêm câu hỏi, cấu hình đề thi, làm bài và xem báo cáo.
+    \item \textbf{Kiểm thử hộp trắng ở mức đơn giản:} Dựa vào logic bên trong hàm để tạo testcase cho các hàm như \texttt{tinhDiem()}, \texttt{tachDong()}, \texttt{laSoNguyen()}, \texttt{timCauHoi()}, \texttt{sinhDeThi()} và \texttt{demCauDung()}.
+    \item \textbf{Kiểm thử dữ liệu đầu vào:} Kiểm tra các trường hợp nhập sai như nhập chữ thay vì số, nhập số ngoài khoảng, nhập đáp án không thuộc \texttt{A/B/C/D} hoặc nhập chuỗi chứa ký tự \texttt{|}.
+    \item \textbf{Kiểm thử điều kiện biên:} Kiểm tra các trường hợp như số câu dễ bằng 0, số câu khó bằng 0, tổng số câu bằng 0, số câu nhập lớn hơn số câu có sẵn, bài thi có 0 câu đúng và hàm tính điểm với tổng số câu bằng 0.
+    \item \textbf{Kiểm thử hồi quy:} Sau khi chia code thành nhiều module, chương trình được biên dịch lại và chạy lại các chức năng chính để đảm bảo việc sửa code không làm hỏng chức năng cũ.
+\end{itemize}
+
+\subsection{Phạm vi và dữ liệu kiểm thử}
+
+Kiểm thử được thực hiện trên chương trình console. Dữ liệu kiểm thử chính nằm trong thư mục \texttt{data}, gồm các file:
+
+\begin{itemize}
+    \item \texttt{data/subjects.txt}
+    \item \texttt{data/questions.txt}
+    \item \texttt{data/candidates.txt}
+    \item \texttt{data/results.txt}
+\end{itemize}
+
+Unit test tự động sử dụng dữ liệu mẫu tạo trực tiếp trong \texttt{test.cpp}, không ghi đè dữ liệu thật của chương trình. Một phần kiểm thử chức năng được thực hiện thủ công thông qua menu chương trình.
+
+\subsection{Kiểm thử theo từng module}
+
+\begin{longtable}{|>{\Centering\arraybackslash}p{0.26\textwidth}|>{\RaggedRight\arraybackslash}p{0.44\textwidth}|>{\Centering\arraybackslash}p{0.12\textwidth}|}
+\caption{Kiểm thử theo từng module}\label{tab:kiem-thu-module}\\
+\hline
+\textbf{Module} & \multicolumn{1}{>{\Centering\arraybackslash}p{0.44\textwidth}|}{\textbf{Nội dung kiểm thử}} & \textbf{Kết quả} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Module} & \multicolumn{1}{>{\Centering\arraybackslash}p{0.44\textwidth}|}{\textbf{Nội dung kiểm thử}} & \textbf{Kết quả} \\
+\hline
+\endhead
+\texttt{tien\_ich} & Cắt khoảng trắng, kiểm tra số nguyên, chuyển chuỗi sang số, tách dòng, xáo trộn, tính điểm. & Đạt \\
+\hline
+\texttt{du\_lieu} & Đọc dữ liệu từ file, tìm kiếm môn học, thí sinh, câu hỏi theo mã. & Đạt \\
+\hline
+\texttt{ngan\_hang\_cau\_hoi} & Sinh mã câu hỏi mới, kiểm tra câu hỏi dễ/khó, đếm số câu theo môn và mức độ. & Đạt \\
+\hline
+\texttt{thi} & Tạo câu hỏi trong đề, sinh đề theo số câu dễ/khó, kiểm tra hết giờ. & Đạt \\
+\hline
+\texttt{bao\_cao} & Đếm câu đúng, sinh mã kết quả mới, tính điểm báo cáo. & Đạt \\
+\hline
+\texttt{menu} & Gọi đúng các chức năng từ menu chính. & Đạt \\
+\hline
+\end{longtable}
+
+\subsection{Unit test tự động}
+
+Nhóm tạo file \texttt{test.cpp} để kiểm thử tự động các hàm xử lý không phụ thuộc nhiều vào nhập/xuất console. Các test được viết theo dạng gọi hàm, so sánh kết quả thực tế với kết quả mong đợi và in \texttt{[PASS]} hoặc \texttt{[FAIL]}.
+
+Các nhóm hàm được unit test gồm:
+
+\begin{itemize}
+    \item Nhóm hàm tiện ích: \texttt{catKhoangTrang()}, \texttt{laSoNguyen()}, \texttt{chuoiSangSo()}, \texttt{tachDong()}, \texttt{xaoTronVectorSoNguyen()}, \texttt{tinhDiem()}.
+    \item Nhóm hàm tìm kiếm: \texttt{timMonHoc()}, \texttt{timThiSinh()}, \texttt{timCauHoi()}.
+    \item Nhóm ngân hàng câu hỏi: \texttt{sinhMaCauHoiMoi()}, \texttt{laCauHoiDungLoai()},\\
+    \texttt{demCauHoiTheoMonVaLoai()}.
+    \item Nhóm thi: \texttt{themCauHoiVaoDeThi()}, \texttt{sinhDeThi()}, \texttt{hetGio()}.
+    \item Nhóm báo cáo: \texttt{demCauDung()}, \texttt{sinhMaKetQuaMoi()}.
+    \item Nhóm đọc dữ liệu thật: kiểm tra \texttt{docDuLieu()} đọc được các file trong thư mục \texttt{data}.
+\end{itemize}
+
+\begin{lstlisting}[caption={Biên dịch chương trình unit test}]
+g++ -std=c++11 -Wall -Wextra test.cpp tien_ich.cpp du_lieu.cpp ngan_hang_cau_hoi.cpp thi.cpp bao_cao.cpp -o test.exe
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Chạy unit test}]
+.\test.exe
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Kết quả chạy unit test}]
+Tong so test dat: 42
+Tong so test loi: 0
+Ket qua: TAT CA UNIT TEST DEU DAT
+\end{lstlisting}
+
+Unit test chưa kiểm thử trực tiếp toàn bộ các hàm tương tác console như \texttt{menuChinh()}, \texttt{lamBaiThi()} đầy đủ hoặc \texttt{batDauThi()}. Các chức năng tương tác này được kiểm thử thủ công bằng testcase chức năng.
+
+\subsection{Bảng kiểm thử chức năng}
+
+{\scriptsize
+\setlength{\tabcolsep}{2.2pt}
+\renewcommand{\arraystretch}{1.25}
+\begin{longtable}{|>{\centering\arraybackslash}m{0.055\textwidth}|>{\centering\arraybackslash}m{0.10\textwidth}|>{\centering\arraybackslash}m{0.13\textwidth}|>{\raggedright\arraybackslash}m{0.13\textwidth}|>{\raggedright\arraybackslash}m{0.14\textwidth}|>{\raggedright\arraybackslash}m{0.15\textwidth}|>{\raggedright\arraybackslash}m{0.14\textwidth}|>{\centering\arraybackslash}m{0.055\textwidth}|}
+\caption{Bảng kiểm thử chức năng}\label{tab:kiem-thu-chuc-nang}\\
+\hline
+\textbf{Mã TC} & \textbf{Nhóm} & \textbf{Chức năng/Hàm} & \textbf{Dữ liệu vào} & \textbf{Bước thực hiện} & \textbf{Kết quả mong đợi} & \textbf{Kết quả thực tế} & \textbf{Đánh giá} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Mã TC} & \textbf{Nhóm} & \textbf{Chức năng/Hàm} & \textbf{Dữ liệu vào} & \textbf{Bước thực hiện} & \textbf{Kết quả mong đợi} & \textbf{Kết quả thực tế} & \textbf{Đánh giá} \\
+\hline
+\endhead
+
+TC01 & Dữ liệu & \texttt{docDuLieu()} & 4 file trong \texttt{data} hợp lệ & Chạy chương trình, vào các chức năng xem dữ liệu & Dữ liệu được đọc vào vector & Hiển thị được dữ liệu từ file & Đạt \\
+\hline
+
+TC02 & Ngân hàng câu hỏi & Xem câu hỏi theo môn & Mã môn học tồn tại & Chọn xem câu hỏi theo môn & Hiển thị câu hỏi đúng môn & Hiển thị đúng & Đạt \\
+\hline
+
+TC03 & Ngân hàng câu hỏi & Thêm câu hỏi & Nội dung, 4 đáp án, đáp án đúng, mức độ & Nhập câu hỏi mới & Câu hỏi được thêm và lưu file & Câu hỏi được ghi vào \texttt{data/}\allowbreak\texttt{questions.txt} & Đạt \\
+\hline
+
+TC04 & Dữ liệu vào & Nhập mã môn không tồn tại & Mã môn sai & Bắt đầu thi, nhập mã môn sai & Báo môn học không tồn tại & Chương trình báo lỗi & Đạt \\
+\hline
+
+TC05 & Dữ liệu vào & Nhập đáp án không hợp lệ & \texttt{X}, \texttt{123}, \texttt{AB} & Làm bài và nhập đáp án sai & Yêu cầu nhập lại & Chương trình yêu cầu nhập lại & Đạt \\
+\hline
+
+TC06 & Sinh đề & \texttt{sinhDeThi()} & 2 câu dễ, 1 câu khó & Cấu hình đề thi & Đề có đúng 3 câu & Sinh đúng số câu & Đạt \\
+\hline
+
+TC07 & Điều kiện biên & Tổng số câu bằng 0 & 0 câu dễ, 0 câu khó & Cấu hình đề thi & Không cho tạo đề rỗng & Yêu cầu nhập lại & Đạt \\
+\hline
+
+TC08 & Điều kiện biên & Số câu vượt dữ liệu có sẵn & Nhập số câu lớn hơn số câu có sẵn & Cấu hình đề thi & Không cho nhập vượt & \texttt{nhapSo()} giới hạn theo số câu có sẵn & Đạt \\
+\hline
+
+TC09 & Thi & Làm bài và chấm điểm & Trả lời đúng/sai một số câu & Hoàn thành bài thi & Đếm đúng số câu đúng & Kết quả đúng & Đạt \\
+\hline
+
+TC10 & Thời gian & \texttt{hetGio()} và thu bài & Thời gian làm bài kết thúc & Chờ hết giờ trong lúc làm bài & Tự động thu bài & Có thông báo hết giờ và thu bài & Đạt \\
+\hline
+
+TC11 & Báo cáo & \texttt{luuKetQua()} & Hoàn thành bài thi & Xem file \texttt{data/}\allowbreak\texttt{results.txt} & Có thêm kết quả thi & Kết quả được lưu & Đạt \\
+\hline
+
+TC12 & Báo cáo & \texttt{hienThi}\allowbreak\texttt{BaoCao}\allowbreak\texttt{KetQua()} & File \texttt{results.txt} có nhiều kết quả & Chọn xem báo cáo & Hiển thị nhiều lần thi và điểm & Hiển thị đúng & Đạt \\
+\hline
+\end{longtable}
+}
+
+\subsection{Kiểm thử dữ liệu đầu vào và điều kiện biên}
+
+\begin{longtable}{|>{\RaggedRight\arraybackslash}p{0.28\textwidth}|>{\RaggedRight\arraybackslash}p{0.24\textwidth}|>{\RaggedRight\arraybackslash}p{0.38\textwidth}|}
+\caption{Kiểm thử dữ liệu đầu vào và điều kiện biên}\label{tab:kiem-thu-bien}\\
+\hline
+\textbf{Trường hợp} & \textbf{Dữ liệu thử} & \textbf{Cách xử lý của chương trình} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Trường hợp} & \textbf{Dữ liệu thử} & \textbf{Cách xử lý của chương trình} \\
+\hline
+\endhead
+Nhập số sai kiểu & \texttt{abc}, \texttt{12a} & Báo lỗi và yêu cầu nhập số nguyên. \\
+\hline
+Nhập số ngoài khoảng & Số câu lớn hơn số câu có sẵn & Không cho nhập vượt. \\
+\hline
+Nhập đáp án sai & \texttt{X}, \texttt{123}, \texttt{AB} & Chỉ chấp nhận \texttt{A/B/C/D} hoặc bỏ trống. \\
+\hline
+Nhập chuỗi rỗng & Không nhập nội dung câu hỏi & Yêu cầu nhập lại. \\
+\hline
+Nhập ký tự phân tách file & Chuỗi chứa \texttt{|} & Không cho nhập để tránh hỏng định dạng file. \\
+\hline
+Tính điểm với tổng số câu bằng 0 & \texttt{tinhDiem(5, 0)} & Trả về 0 để tránh chia cho 0. \\
+\hline
+\end{longtable}
+
+\subsection{Kiểm thử tích hợp sau khi chia module}
+
+Sau khi chia chương trình thành các module, nhóm biên dịch lại toàn bộ chương trình bằng lệnh:
+
+\begin{lstlisting}[caption={Biên dịch toàn bộ chương trình}]
+g++ -std=c++11 -Wall -Wextra main.cpp tien_ich.cpp du_lieu.cpp ngan_hang_cau_hoi.cpp thi.cpp bao_cao.cpp menu.cpp -o main.exe
+\end{lstlisting}
+
+Luồng tích hợp đã kiểm thử gồm:
+
+\begin{lstlisting}[caption={Luồng kiểm thử tích hợp}]
+Doc du lieu -> Menu chinh -> Quan ly cau hoi -> Sinh de -> Lam bai -> Cham diem -> Luu ket qua -> Xem bao cao
+\end{lstlisting}
+
+Kết quả cho thấy chương trình biên dịch thành công, không còn lỗi liên kết hàm giữa các module và các module gọi được hàm của nhau thông qua file \texttt{.h}.
+
+\subsection{Kết quả và đánh giá kiểm thử}
+
+\begin{longtable}{|>{\RaggedRight\arraybackslash}p{0.45\textwidth}|>{\Centering\arraybackslash}p{0.35\textwidth}|}
+\caption{Tổng kết kết quả kiểm thử}\label{tab:tong-ket-kiem-thu}\\
+\hline
+\textbf{Nội dung} & \textbf{Kết quả} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Nội dung} & \textbf{Kết quả} \\
+\hline
+\endhead
+Số unit test tự động & 42 \\
+\hline
+Unit test đạt & 42 \\
+\hline
+Unit test lỗi & 0 \\
+\hline
+Số testcase chức năng thủ công & 12 \\
+\hline
+Testcase thủ công đạt & 12 \\
+\hline
+Testcase thủ công lỗi & 0 \\
+\hline
+\end{longtable}
+
+Qua quá trình kiểm thử, chương trình đáp ứng được các chức năng chính của bài toán thi trắc nghiệm. Các chức năng đọc/ghi file, quản lý câu hỏi, sinh đề, làm bài, chấm điểm và báo cáo kết quả đều hoạt động đúng. Chương trình cũng xử lý được một số trường hợp nhập sai dữ liệu, phù hợp với kỹ thuật lập trình phòng ngừa.
+
+Tuy nhiên, phần kiểm thử vẫn còn một số hạn chế. Unit test mới kiểm tra các hàm xử lý, chưa tự động hóa toàn bộ thao tác nhập/xuất console. Kiểm thử thời gian tự động mới kiểm tra hàm \texttt{hetGio()}, còn quá trình chờ hết giờ khi làm bài được kiểm thử thủ công. Chương trình cũng chưa được kiểm thử với dữ liệu cực lớn và kiểm thử xáo trộn mới kiểm tra tính hợp lệ của hoán vị, chưa đánh giá xác suất ngẫu nhiên.
+
+\subsection{Ảnh minh họa kiểm thử}
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{images/build_thanh_cong.png}{\includegraphics[width=0.8\textwidth]{images/build_thanh_cong.png}}{\fbox{\parbox{0.8\textwidth}{\centering Chèn ảnh \texttt{images/build\_thanh\_cong.png} tại đây.}}}
+    \caption{Minh họa build chương trình chính thành công}
+    \label{fig:build-thanh-cong}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{images/unit_test_42_dat.png}{\includegraphics[width=0.8\textwidth]{images/unit_test_42_dat.png}}{\fbox{\parbox{0.8\textwidth}{\centering Chèn ảnh \texttt{images/unit\_test\_42\_dat.png} tại đây.}}}
+    \caption{Minh họa kết quả chạy unit test 42 test đạt}
+    \label{fig:unit-test-42-dat}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{images/kiem_thu_nhap_dap_an_sai.png}{\includegraphics[width=0.8\textwidth]{images/kiem_thu_nhap_dap_an_sai.png}}{\fbox{\parbox{0.8\textwidth}{\centering Chèn ảnh \texttt{images/kiem\_thu\_nhap\_dap\_an\_sai.png} tại đây.}}}
+    \caption{Minh họa kiểm thử nhập đáp án sai}
+    \label{fig:kiem-thu-nhap-dap-an-sai}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{images/kiem_thu_sinh_de.png}{\includegraphics[width=0.8\textwidth]{images/kiem_thu_sinh_de.png}}{\fbox{\parbox{0.8\textwidth}{\centering Chèn ảnh \texttt{images/kiem\_thu\_sinh\_de.png} tại đây.}}}
+    \caption{Minh họa kiểm thử sinh đề thi}
+    \label{fig:kiem-thu-sinh-de}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{images/kiem_thu_bao_cao.png}{\includegraphics[width=0.8\textwidth]{images/kiem_thu_bao_cao.png}}{\fbox{\parbox{0.8\textwidth}{\centering Chèn ảnh \texttt{images/kiem\_thu\_bao\_cao.png} tại đây.}}}
+    \caption{Minh họa kiểm thử xem báo cáo kết quả}
+    \label{fig:kiem-thu-bao-cao}
+\end{figure}
+
+
+\subsubsection*{Ảnh minh họa 12 test case chức năng}
+
+Các hình dưới đây dùng để chèn ảnh minh họa tương ứng với 12 test case trong Bảng~\ref{tab:kiem-thu-chuc-nang}. Nếu chưa có ảnh, báo cáo sẽ hiển thị khung chờ để bổ sung sau.
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{images/kiem_thu_tc01.png}{\includegraphics[width=0.8\textwidth]{images/kiem_thu_tc01.png}}{\fbox{\parbox{0.8\textwidth}{\centering Chèn ảnh \texttt{images/kiem\_thu\_tc01.png} tại đây.}}}
+    \caption{Minh họa kiểm thử chức năng TC01}
+    \label{fig:kiem-thu-tc01}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{images/kiem_thu_tc02.png}{\includegraphics[width=0.8\textwidth]{images/kiem_thu_tc02.png}}{\fbox{\parbox{0.8\textwidth}{\centering Chèn ảnh \texttt{images/kiem\_thu\_tc02.png} tại đây.}}}
+    \caption{Minh họa kiểm thử chức năng TC02}
+    \label{fig:kiem-thu-tc02}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{images/kiem_thu_tc03.png}{\includegraphics[width=0.8\textwidth]{images/kiem_thu_tc03.png}}{\fbox{\parbox{0.8\textwidth}{\centering Chèn ảnh \texttt{images/kiem\_thu\_tc03.png} tại đây.}}}
+    \caption{Minh họa kiểm thử chức năng TC03}
+    \label{fig:kiem-thu-tc03}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{images/kiem_thu_tc04.png}{\includegraphics[width=0.8\textwidth]{images/kiem_thu_tc04.png}}{\fbox{\parbox{0.8\textwidth}{\centering Chèn ảnh \texttt{images/kiem\_thu\_tc04.png} tại đây.}}}
+    \caption{Minh họa kiểm thử chức năng TC04}
+    \label{fig:kiem-thu-tc04}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{images/kiem_thu_tc05.png}{\includegraphics[width=0.8\textwidth]{images/kiem_thu_tc05.png}}{\fbox{\parbox{0.8\textwidth}{\centering Chèn ảnh \texttt{images/kiem\_thu\_tc05.png} tại đây.}}}
+    \caption{Minh họa kiểm thử chức năng TC05}
+    \label{fig:kiem-thu-tc05}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{images/kiem_thu_tc06.png}{\includegraphics[width=0.8\textwidth]{images/kiem_thu_tc06.png}}{\fbox{\parbox{0.8\textwidth}{\centering Chèn ảnh \texttt{images/kiem\_thu\_tc06.png} tại đây.}}}
+    \caption{Minh họa kiểm thử chức năng TC06}
+    \label{fig:kiem-thu-tc06}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{images/kiem_thu_tc07.png}{\includegraphics[width=0.8\textwidth]{images/kiem_thu_tc07.png}}{\fbox{\parbox{0.8\textwidth}{\centering Chèn ảnh \texttt{images/kiem\_thu\_tc07.png} tại đây.}}}
+    \caption{Minh họa kiểm thử chức năng TC07}
+    \label{fig:kiem-thu-tc07}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{images/kiem_thu_tc08.png}{\includegraphics[width=0.8\textwidth]{images/kiem_thu_tc08.png}}{\fbox{\parbox{0.8\textwidth}{\centering Chèn ảnh \texttt{images/kiem\_thu\_tc08.png} tại đây.}}}
+    \caption{Minh họa kiểm thử chức năng TC08}
+    \label{fig:kiem-thu-tc08}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{images/kiem_thu_tc09.png}{\includegraphics[width=0.8\textwidth]{images/kiem_thu_tc09.png}}{\fbox{\parbox{0.8\textwidth}{\centering Chèn ảnh \texttt{images/kiem\_thu\_tc09.png} tại đây.}}}
+    \caption{Minh họa kiểm thử chức năng TC09}
+    \label{fig:kiem-thu-tc09}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{images/kiem_thu_tc10.png}{\includegraphics[width=0.8\textwidth]{images/kiem_thu_tc10.png}}{\fbox{\parbox{0.8\textwidth}{\centering Chèn ảnh \texttt{images/kiem\_thu\_tc10.png} tại đây.}}}
+    \caption{Minh họa kiểm thử chức năng TC10}
+    \label{fig:kiem-thu-tc10}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{images/kiem_thu_tc11.png}{\includegraphics[width=0.8\textwidth]{images/kiem_thu_tc11.png}}{\fbox{\parbox{0.8\textwidth}{\centering Chèn ảnh \texttt{images/kiem\_thu\_tc11.png} tại đây.}}}
+    \caption{Minh họa kiểm thử chức năng TC11}
+    \label{fig:kiem-thu-tc11}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{images/kiem_thu_tc12.png}{\includegraphics[width=0.8\textwidth]{images/kiem_thu_tc12.png}}{\fbox{\parbox{0.8\textwidth}{\centering Chèn ảnh \texttt{images/kiem\_thu\_tc12.png} tại đây.}}}
+    \caption{Minh họa kiểm thử chức năng TC12}
+    \label{fig:kiem-thu-tc12}
+\end{figure}
+
+\section{Kết quả thực hiện}
+
+Phần này dùng để chèn ảnh chụp màn hình kết quả chạy chương trình. Các file ảnh được giả định đặt trong thư mục \texttt{images/}.
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{images/menu_chinh.png}{\includegraphics[width=0.8\textwidth]{images/menu_chinh.png}}{\fbox{\parbox{0.8\textwidth}{\centering Chèn ảnh \texttt{images/menu\_chinh.png} tại đây.}}}
+    \caption{Menu chính của chương trình}
+    \label{fig:menu-chinh}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{images/danh_sach_mon_cau_hoi.png}{\includegraphics[width=0.8\textwidth]{images/danh_sach_mon_cau_hoi.png}}{\fbox{\parbox{0.8\textwidth}{\centering Chèn ảnh \texttt{images/danh\_sach\_mon\_cau\_hoi.png} tại đây.}}}
+    \caption{Danh sách môn học và câu hỏi}
+    \label{fig:danh-sach-mon-cau-hoi}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{images/them_cau_hoi.png}{\includegraphics[width=0.8\textwidth]{images/them_cau_hoi.png}}{\fbox{\parbox{0.8\textwidth}{\centering Chèn ảnh \texttt{images/them\_cau\_hoi.png} tại đây.}}}
+    \caption{Chức năng thêm câu hỏi}
+    \label{fig:them-cau-hoi}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{images/cau_hinh_de_thi.png}{\includegraphics[width=0.8\textwidth]{images/cau_hinh_de_thi.png}}{\fbox{\parbox{0.8\textwidth}{\centering Chèn ảnh \texttt{images/cau\_hinh\_de\_thi.png} tại đây.}}}
+    \caption{Cấu hình đề thi}
+    \label{fig:cau-hinh-de-thi}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{images/giao_dien_lam_bai.png}{\includegraphics[width=0.8\textwidth]{images/giao_dien_lam_bai.png}}{\fbox{\parbox{0.8\textwidth}{\centering Chèn ảnh \texttt{images/giao\_dien\_lam\_bai.png} tại đây.}}}
+    \caption{Giao diện làm bài}
+    \label{fig:giao-dien-lam-bai}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{images/ket_qua_nop_bai.png}{\includegraphics[width=0.8\textwidth]{images/ket_qua_nop_bai.png}}{\fbox{\parbox{0.8\textwidth}{\centering Chèn ảnh \texttt{images/ket\_qua\_nop\_bai.png} tại đây.}}}
+    \caption{Kết quả sau khi nộp bài}
+    \label{fig:ket-qua-nop-bai}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{images/bao_cao_ket_qua.png}{\includegraphics[width=0.8\textwidth]{images/bao_cao_ket_qua.png}}{\fbox{\parbox{0.8\textwidth}{\centering Chèn ảnh \texttt{images/bao\_cao\_ket\_qua.png} tại đây.}}}
+    \caption{Báo cáo kết quả nhiều lần thi}
+    \label{fig:bao-cao-ket-qua}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{images/results_txt.png}{\includegraphics[width=0.8\textwidth]{images/results_txt.png}}{\fbox{\parbox{0.8\textwidth}{\centering Chèn ảnh \texttt{images/results\_txt.png} tại đây.}}}
+    \caption{File \texttt{data/results.txt} sau khi lưu kết quả}
+    \label{fig:results-txt}
+\end{figure}
+
+
+\section{Các kỹ thuật đã áp dụng}
+
+Trong quá trình xây dựng chương trình thi trắc nghiệm, nhóm đã vận dụng một số kỹ thuật lập trình cơ bản đã học. Các kỹ thuật này giúp chương trình có cấu trúc rõ ràng, dễ đọc, dễ kiểm thử và phù hợp với làm việc nhóm.
+
+\subsection{Kỹ thuật lập trình có cấu trúc}
+
+Chương trình áp dụng kỹ thuật lập trình có cấu trúc bằng cách tổ chức xử lý theo các khối rõ ràng, sử dụng tuần tự, rẽ nhánh, vòng lặp và chương trình con. Hàm \texttt{main()} không chứa toàn bộ logic xử lý mà chỉ thực hiện các bước khởi động chính như khởi tạo sinh số ngẫu nhiên, đọc dữ liệu và gọi menu chính.
+
+Các thao tác lớn được tách thành các hàm riêng như \texttt{docDuLieu()}, \texttt{menuChinh()}, \texttt{sinhDeThi()}, \texttt{lamBaiThi()} và \texttt{luuKetQua()}. Cách tổ chức này giúp chương trình dễ theo dõi hơn, đồng thời thuận lợi khi kiểm tra hoặc sửa lỗi từng phần.
+
+\subsection{Kỹ thuật thiết kế trên xuống}
+
+Bài toán tổng thể là xây dựng chương trình quản lý thi trắc nghiệm. Từ bài toán lớn này, nhóm chia chương trình thành các nhóm chức năng nhỏ hơn như quản lý dữ liệu, quản lý ngân hàng câu hỏi, tổ chức thi, chấm điểm, báo cáo và menu điều khiển.
+
+Quá trình phân rã có thể mô tả ngắn gọn như sau:
+
+\begin{lstlisting}[caption={Phân rã chức năng theo thiết kế trên xuống}]
+Thi trac nghiem
+-> Doc du lieu
+-> Hien thi menu
+-> Quan ly cau hoi
+-> Sinh de thi
+-> Lam bai
+-> Cham diem
+-> Bao cao ket qua
+\end{lstlisting}
+
+Mỗi nhóm chức năng tiếp tục được chia thành các hàm nhỏ hơn. Nhờ đó, khi cài đặt chương trình, nhóm có thể xử lý từng phần theo thứ tự từ tổng quát đến chi tiết.
+
+\subsection{Kỹ thuật module hóa}
+
+Chương trình được chia thành nhiều module, mỗi module đảm nhiệm một nhóm công việc riêng. Việc module hóa giúp mã nguồn gọn hơn, dễ chia việc cho các thành viên và dễ khoanh vùng khi có lỗi.
+
+\begin{longtable}{|>{\Centering\arraybackslash}p{0.28\textwidth}|>{\RaggedRight\arraybackslash}p{0.62\textwidth}|}
+\caption{Các module chính trong chương trình}\label{tab:module-ky-thuat}\\
+\hline
+\textbf{Module} & \multicolumn{1}{>{\Centering\arraybackslash}p{0.62\textwidth}|}{\textbf{Vai trò}} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Module} & \multicolumn{1}{>{\Centering\arraybackslash}p{0.62\textwidth}|}{\textbf{Vai trò}} \\
+\hline
+\endhead
+\texttt{main} & Điểm bắt đầu chương trình. \\
+\hline
+\texttt{tien\_ich} & Chứa các hàm tiện ích dùng chung. \\
+\hline
+\texttt{du\_lieu} & Khai báo \texttt{struct}, vector dữ liệu, đọc/ghi file và tìm kiếm. \\
+\hline
+\texttt{ngan\_hang\_cau\_hoi} & Quản lý câu hỏi, xem câu hỏi và thêm câu hỏi mới. \\
+\hline
+\texttt{thi} & Sinh đề, làm bài và kiểm tra thời gian. \\
+\hline
+\texttt{bao\_cao} & Chấm điểm, lưu kết quả và in báo cáo. \\
+\hline
+\texttt{menu} & Điều phối menu chương trình. \\
+\hline
+\end{longtable}
+
+Cách chia này cũng phù hợp với làm việc nhóm vì mỗi thành viên có thể phụ trách một số module riêng, sau đó ghép lại thành chương trình hoàn chỉnh.
+
+\subsection{Kỹ thuật sử dụng chương trình con}
+
+Chương trình sử dụng nhiều chương trình con để xử lý từng nghiệp vụ cụ thể. Mỗi hàm có một nhiệm vụ tương đối rõ ràng, đủ ngắn để dễ nắm bắt và dễ kiểm thử.
+
+Một số hàm tiêu biểu gồm:
+
+\begin{itemize}
+    \item \texttt{docDuLieu()}: đọc dữ liệu từ file text vào vector.
+    \item \texttt{ghiDuLieu()}: ghi dữ liệu từ vector ra file text.
+    \item \texttt{timCauHoi()}, \texttt{timMonHoc()}, \texttt{timThiSinh()}: tìm kiếm dữ liệu theo mã.
+    \item \texttt{sinhDeThi()}: sinh đề theo số câu dễ và số câu khó.
+    \item \texttt{hetGio()}: kiểm tra thời gian làm bài.
+    \item \texttt{lamBaiThi()}: điều khiển quá trình làm bài.
+    \item \texttt{demCauDung()}: đếm số câu trả lời đúng để chấm điểm.
+    \item \texttt{hienThiBaoCaoKetQua()}: hiển thị báo cáo kết quả thi.
+\end{itemize}
+
+Việc tách chương trình thành nhiều hàm giúp tránh lặp code và giúp phần xử lý trong từng hàm rõ ràng hơn.
+
+\subsection{Kỹ thuật lựa chọn cấu trúc dữ liệu phù hợp}
+
+Chương trình sử dụng \texttt{struct} để mô tả các đối tượng dữ liệu đơn giản như \texttt{MonHoc}, \texttt{CauHoi}, \texttt{ThiSinh} và \texttt{KetQuaThi}. Đây là lựa chọn phù hợp vì các đối tượng này chủ yếu dùng để lưu trữ thông tin.
+
+Các danh sách dữ liệu được lưu bằng \texttt{vector}, gồm \texttt{dsMonHoc}, \texttt{dsCauHoi}, \texttt{dsThiSinh} và \texttt{dsKetQua}. \texttt{vector} phù hợp vì số lượng môn học, câu hỏi, thí sinh và kết quả có thể thay đổi khi đọc từ file hoặc khi thêm dữ liệu mới. Riêng đáp án của câu hỏi được lưu bằng mảng \texttt{string dapAn[SO\_DAP\_AN]} vì mỗi câu hỏi luôn có đúng 4 đáp án.
+
+\subsection{Kỹ thuật xử lý file}
+
+Chương trình sử dụng kỹ thuật đọc/ghi file text để lưu dữ liệu lâu dài. Các file dữ liệu chính gồm:
+
+\begin{itemize}
+    \item \texttt{data/subjects.txt}
+    \item \texttt{data/questions.txt}
+    \item \texttt{data/candidates.txt}
+    \item \texttt{data/results.txt}
+\end{itemize}
+
+Khi bắt đầu chương trình, hàm \texttt{docDuLieu()} đọc các file text vào vector. Khi có thay đổi hoặc có kết quả thi mới, hàm \texttt{ghiDuLieu()} ghi lại dữ liệu ra file. Mỗi dòng trong file là một bản ghi và các trường trong một dòng được phân tách bằng ký tự \texttt{|}.
+
+\subsection{Kỹ thuật kiểm tra dữ liệu đầu vào}
+
+Chương trình áp dụng tinh thần lập trình phòng ngừa thông qua việc kiểm tra dữ liệu đầu vào. Hàm \texttt{nhapSo()} chỉ cho phép nhập số trong khoảng hợp lệ. Hàm \texttt{nhapChuoi()} không cho nhập chuỗi rỗng hoặc chuỗi chứa ký tự phân tách \texttt{|}.
+
+Trong quá trình làm bài, khi nhập đáp án, chương trình chỉ chấp nhận \texttt{A}, \texttt{B}, \texttt{C}, \texttt{D} hoặc bỏ trống. Nếu người dùng nhập sai, chương trình báo lỗi và yêu cầu nhập lại. Việc kiểm tra này giúp hạn chế dữ liệu sai làm chương trình chạy sai và giúp chương trình ổn định hơn khi người dùng nhập ngẫu nhiên.
+
+\subsection{Kỹ thuật đặt tên}
+
+Mã nguồn sử dụng cách đặt tên gợi nhớ và tương đối nhất quán. Tên hàm thường dùng động từ hoặc cụm động từ để thể hiện hành động, ví dụ \texttt{docDuLieu()}, \texttt{ghiDuLieu()}, \texttt{timCauHoi()}, \texttt{sinhDeThi()}, \texttt{lamBaiThi()}, \texttt{luuKetQua()} và \texttt{hienThiBaoCaoKetQua()}.
+
+Tên biến dùng tiếng Việt không dấu, dễ hiểu, ví dụ \texttt{dsCauHoi}, \texttt{dsThiSinh}, \texttt{maMonHoc}, \texttt{soCauDung}, \texttt{thoiGianLamBaiGiay} và \texttt{dapAnDaChon}. Hằng số cũng được đặt tên rõ ý nghĩa, ví dụ \texttt{SO\_DAP\_AN = 4}. Cách đặt tên này giúp người đọc nhanh chóng hiểu được vai trò của hàm và biến.
+
+\subsection{Kỹ thuật trình bày mã và chú thích}
+
+Chương trình được trình bày theo hướng tách khai báo vào file \texttt{.h} và tách phần cài đặt vào file \texttt{.cpp}. Mã nguồn sử dụng thụt lề thống nhất, không viết toàn bộ chương trình trong một file duy nhất.
+
+Các chú thích trong chương trình chủ yếu mô tả nhiệm vụ chính của hàm hoặc đoạn xử lý quan trọng, không chú thích quá nhiều cho từng dòng đơn giản. Cách làm này phù hợp với nguyên tắc mã nguồn nên tự diễn tả, còn chú thích dùng để giải thích mục đích của phần xử lý.
+
+\subsection{Kỹ thuật kiểm thử theo từng phần}
+
+Sau khi chia module, chương trình có thể được kiểm thử theo từng phần trước khi kiểm thử toàn bộ. Các phần kiểm thử tiêu biểu gồm đọc/ghi file, thêm và hiển thị câu hỏi, sinh đề theo số câu dễ/khó, nhập đáp án sai, chấm điểm và in báo cáo kết quả.
+
+Đây là cách kiểm thử tăng dần: kiểm thử từng module nhỏ trước, sau đó kiểm thử luồng chương trình hoàn chỉnh. Cách làm này giúp phát hiện lỗi sớm và giảm khó khăn khi tìm nguyên nhân lỗi.
+
+\subsection{Kết luận về kỹ thuật áp dụng}
+
+Nhìn chung, các kỹ thuật trên giúp chương trình có cấu trúc rõ ràng, dễ đọc, dễ bảo trì và phù hợp với làm việc nhóm. Việc chia module, dùng chương trình con, kiểm tra dữ liệu đầu vào và kiểm thử từng phần giúp chương trình đáp ứng đúng yêu cầu bài toán quản lý thi trắc nghiệm ở mức bài tập đại học.
+
+\section{Kết luận}
+
+\subsection{Kết quả đạt được}
+
+Chương trình đã xây dựng được các chức năng cơ bản của một hệ thống thi trắc nghiệm đơn giản: quản lý ngân hàng câu hỏi, sinh đề thi, làm bài, chấm điểm tự động và lưu kết quả thi vào file text.
+
+\subsection{Hạn chế}
+
+Chương trình hiện hoạt động trên giao diện console nên chưa có giao diện đồ họa trực quan. Dữ liệu lưu trong file text phù hợp với quy mô nhỏ nhưng chưa tối ưu khi số lượng dữ liệu lớn.
+
+\subsection{Hướng phát triển}
+
+Trong tương lai, chương trình có thể được mở rộng theo các hướng như xây dựng giao diện đồ họa, bổ sung phân quyền người dùng, thống kê điểm số chi tiết, mã hóa dữ liệu và sử dụng cơ sở dữ liệu để lưu trữ lâu dài.
+
+\newpage
+\appendix
+
+\section{Phụ lục A: Code hàm main}
+
+Phần này trình bày code chính trong file \texttt{main.cpp}.
+
+\begin{lstlisting}[style=cppstyle, caption={Code hàm main hiện tại}]
+#include "menu.h"
+
+// Diem bat dau chuong trinh: khoi tao sinh so ngau nhien, doc du lieu va mo menu chinh.
+int main() {
+    srand((unsigned int)time(NULL));
+    docDuLieu();
+    menuChinh();
+    return 0;
+}
+\end{lstlisting}
+
+\section{Phụ lục B: Mô tả các hàm xử lý chính}
+
+\begin{longtable}{|>{\Centering\arraybackslash}p{0.35\textwidth}|>{\Centering\arraybackslash}p{0.60\textwidth}|}
+\caption{Mô tả các hàm xử lý chính}\label{tab:ham-xu-ly}\\
+\hline
+\textbf{Tên hàm} & \textbf{Mô tả chức năng} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Tên hàm} & \textbf{Mô tả chức năng} \\
+\hline
+\endhead
+\codecell{docDuLieu()} & Đọc toàn bộ dữ liệu từ các file trong thư mục \codecell{data} vào các vector toàn cục. \\
+\hline
+\codecell{ghiDuLieu()} & Ghi dữ liệu từ các vector về các file text tương ứng trong thư mục \codecell{data}. \\
+\hline
+\codecell{timMonHoc()}, \codecell{timThiSinh()}, \codecell{timCauHoi()} & Tìm kiếm tuyến tính môn học, thí sinh hoặc câu hỏi theo mã số nguyên. \\
+\hline
+\codecell{catKhoangTrang()}, \codecell{tachDong()} & Xử lý chuỗi nhập liệu và tách bản ghi theo ký tự phân cách \codecell{|}. \\
+\hline
+\codecell{nhapSo()}, \codecell{nhapChuoi()} & Nhập và kiểm tra dữ liệu từ bàn phím, giới hạn giá trị số khi cần. \\
+\hline
+\codecell{xaoTronVectorSoNguyen()} & Xáo trộn danh sách chỉ số câu hỏi hoặc đáp án bằng thuật toán Fisher-Yates. \\
+\hline
+\codecell{tinhDiem()} & Tính điểm theo thang 10 từ số câu đúng và tổng số câu. \\
+\hline
+\codecell{sinhMaCauHoiMoi()}, \codecell{sinhMaKetQuaMoi()} & Sinh mã số nguyên mới bằng cách lấy mã lớn nhất hiện có cộng thêm 1. \\
+\hline
+\codecell{hienThiMonHoc()}, \codecell{hienThiCauHoiTheoMon()}, \codecell{themCauHoi()} & Quản lý ngân hàng câu hỏi: xem môn học, xem câu hỏi theo môn và thêm câu hỏi mới. \\
+\hline
+\codecell{demCauHoiTheoMonVaLoai()} & Đếm số câu hỏi dễ/khó theo từng môn để kiểm tra điều kiện sinh đề. \\
+\hline
+\codecell{sinhDeThi()}, \codecell{lamBaiThi()}, \codecell{hetGio()} & Sinh đề, tổ chức làm bài, kiểm tra thời gian và tự động thu bài khi hết giờ. \\
+\hline
+\codecell{demCauDung()}, \codecell{luuKetQua()}, \codecell{hienThiBaoCaoKetQua()} & Chấm điểm, lưu kết quả thi và hiển thị báo cáo nhiều lần thi. \\
+\hline
+\codecell{menuChinh()} & Hiển thị menu chính và điều hướng đến các chức năng của chương trình. \\
+\hline
+\end{longtable}
+
+\section{Phụ lục C: Một số dữ liệu mẫu trong file text}
+
+\subsection{File data/subjects.txt}
+
+\begin{lstlisting}[caption={Dữ liệu mẫu file data/subjects.txt}]
+1|Ky thuat lap trinh
+2|Cau truc du lieu
+\end{lstlisting}
+
+\subsection{File data/questions.txt}
+
+\begin{lstlisting}[caption={Dữ liệu mẫu file data/questions.txt}]
+1|1|1|Lenh nao dung de re nhanh trong C++?|if|for|while|return|0
+2|1|1|Kieu du lieu nao thuong dung de luu so nguyen?|double|char|int|string|2
+\end{lstlisting}
+
+\subsection{File data/candidates.txt}
+
+\begin{lstlisting}[caption={Dữ liệu mẫu file data/candidates.txt}]
+1|Nguyen Minh An
+2|Tran Bao Chau
+\end{lstlisting}
+
+\subsection{File data/results.txt}
+
+\begin{lstlisting}[caption={Dữ liệu mẫu file data/results.txt}]
+1|1|1|10|8|2026-06-01 08:15:00|720
+2|2|1|10|6|2026-06-01 08:40:00|690
+\end{lstlisting}
+
+\end{document}
