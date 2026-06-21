@@ -1,174 +1,18 @@
-﻿#include "du_lieu.h"
+#include "du_lieu.h"
 
-const char FILE_MON_HOC[] = "subjects.txt";
-const char FILE_CAU_HOI[] = "questions.txt";
-const char FILE_THI_SINH[] = "candidates.txt";
-const char FILE_KET_QUA[] = "results.txt";
+// Ten file text duoc khai bao extern trong du_lieu.h va dinh nghia tai day.
+const char FILE_MON_HOC[] = "data/subjects.txt";
+const char FILE_CAU_HOI[] = "data/questions.txt";
+const char FILE_THI_SINH[] = "data/candidates.txt";
+const char FILE_KET_QUA[] = "data/results.txt";
 
+// Cac vector nay la bo nho chinh cua chuong trinh sau khi doc file.
 vector<MonHoc> dsMonHoc;
 vector<CauHoi> dsCauHoi;
 vector<ThiSinh> dsThiSinh;
 vector<KetQuaThi> dsKetQua;
-string catKhoangTrang(string s) {
-    int dau = 0;
-    int cuoi = (int)s.length() - 1;
 
-    while (dau <= cuoi && (s[dau] == ' ' || s[dau] == '\t' || s[dau] == '\r' || s[dau] == '\n')) {
-        dau++;
-    }
-    while (cuoi >= dau && (s[cuoi] == ' ' || s[cuoi] == '\t' || s[cuoi] == '\r' || s[cuoi] == '\n')) {
-        cuoi--;
-    }
-
-    string ketQua = "";
-    for (int i = dau; i <= cuoi; i++) {
-        ketQua += s[i];
-    }
-    return ketQua;
-}
-
-// Kiem tra mot chuoi co phai so nguyen khong am hay khong.
-bool laSoNguyen(string s) {
-    s = catKhoangTrang(s);
-    if (s == "") return false;
-
-    for (int i = 0; i < (int)s.length(); i++) {
-        if (s[i] < '0' || s[i] > '9') return false;
-    }
-    return true;
-}
-
-// Chuyen chuoi dang so thanh double, dung duoc cho ca so nguyen va so thuc.
-double chuoiSangSo(string s) {
-    double so = 0;
-    double heSo = 0.1;
-    bool sauDauCham = false;
-    s = catKhoangTrang(s);
-
-    for (int i = 0; i < (int)s.length(); i++) {
-        if (s[i] == '.') {
-            sauDauCham = true;
-        } else if (s[i] >= '0' && s[i] <= '9') {
-            if (!sauDauCham) {
-                so = so * 10 + (s[i] - '0');
-            } else {
-                so += (s[i] - '0') * heSo;
-                heSo /= 10;
-            }
-        }
-    }
-    return so;
-}
-
-// Nhap so nguyen trong khoang cho phep va phong ngua nhap sai.
-int nhapSo(string thongBao, int nhoNhat, int lonNhat) {
-    string dong;
-    int so;
-
-    while (true) {
-        cout << thongBao;
-        getline(cin, dong);
-
-        if (!laSoNguyen(dong)) {
-            cout << "Nhap sai. Hay nhap so nguyen.\n";
-            continue;
-        }
-
-        so = static_cast<int>(chuoiSangSo(dong));
-        if (so < nhoNhat || so > lonNhat) {
-            cout << "Gia tri phai tu " << nhoNhat << " den " << lonNhat << ".\n";
-            continue;
-        }
-
-        return so;
-    }
-}
-
-// Nhap chuoi khong rong va khong chua ky tu phan tach file.
-string nhapChuoi(string thongBao) {
-    string s;
-
-    while (true) {
-        cout << thongBao;
-        getline(cin, s);
-        s = catKhoangTrang(s);
-
-        if (s == "") {
-            cout << "Khong duoc de trong.\n";
-            continue;
-        }
-        if (s.find('|') != string::npos) {
-            cout << "Khong duoc nhap ky tu |.\n";
-            continue;
-        }
-
-        return s;
-    }
-}
-
-// Tach mot dong file text thanh cac truong theo ky tu '|'.
-int tachDong(string dong, string truong[], int soTruongToiDa) {
-    int soTruong = 0;
-    string hienTai = "";
-
-    for (int i = 0; i < (int)dong.length(); i++) {
-        if (dong[i] == '|') {
-            if (soTruong < soTruongToiDa) {
-                truong[soTruong] = hienTai;
-                soTruong++;
-            }
-            hienTai = "";
-        } else {
-            hienTai += dong[i];
-        }
-    }
-
-    if (soTruong < soTruongToiDa) {
-        truong[soTruong] = hienTai;
-        soTruong++;
-    }
-    return soTruong;
-}
-
-// Lay thoi gian hien tai duoi dang chuoi de luu ket qua thi.
-string layThoiGianHienTai() {
-    time_t bayGio = time(NULL);
-    tm* t = localtime(&bayGio);
-    char boDem[32];
-    strftime(boDem, sizeof(boDem), "%Y-%m-%d %H:%M:%S", t);
-    return string(boDem);
-}
-
-// Tam dung man hinh console cho nguoi dung doc ket qua.
-void tamDung() {
-    cout << "\nNhan Enter de tiep tuc...";
-    string s;
-    getline(cin, s);
-}
-
-// Xao tron vector so nguyen bang thuat toan Fisher-Yates.
-void xaoTronVectorSoNguyen(vector<int>& a) {
-    for (int i = static_cast<int>(a.size()) - 1; i > 0; i--) {
-        int j = rand() % (i + 1);
-        int tam = a[i];
-        a[i] = a[j];
-        a[j] = tam;
-    }
-}
-
-// Tinh diem theo thang 10 tu so cau dung va tong so cau.
-double tinhDiem(int soCauDung, int tongSoCau) {
-    if (tongSoCau <= 0) {
-        return 0;
-    }
-    return (double)soCauDung * 10.0 / tongSoCau;
-}
-
-// ==================================================
-// 6. DOC VA GHI FILE
-// ==================================================
-
-// Doc tat ca du lieu tu 4 file text vao bo nho.
+// Doc tat ca du lieu tu 4 file text vao cac vector, moi dong file la mot ban ghi.
 void docDuLieu() {
     ifstream file;
     string dong;
@@ -238,7 +82,7 @@ void docDuLieu() {
     file.close();
 }
 
-// Ghi toan bo du lieu hien tai ra 4 file text.
+// Ghi toan bo du lieu hien tai trong vector ra 4 file text theo dung dinh dang da thong nhat.
 void ghiDuLieu() {
     ofstream file;
 
@@ -273,11 +117,7 @@ void ghiDuLieu() {
     file.close();
 }
 
-// ==================================================
-// 7. QUAN LY NGAN HANG CAU HOI
-// ==================================================
-
-// Tim vi tri mon hoc theo ma mon hoc.
+// Tim vi tri mon hoc theo ma; tra ve -1 neu khong tim thay.
 int timMonHoc(int maMonHoc) {
     for (int i = 0; i < static_cast<int>(dsMonHoc.size()); i++) {
         if (dsMonHoc[i].maMonHoc == maMonHoc) return i;
@@ -285,7 +125,7 @@ int timMonHoc(int maMonHoc) {
     return -1;
 }
 
-// Tim vi tri thi sinh theo ma thi sinh.
+// Tim vi tri thi sinh theo ma; tra ve -1 neu khong tim thay.
 int timThiSinh(int maThiSinh) {
     for (int i = 0; i < static_cast<int>(dsThiSinh.size()); i++) {
         if (dsThiSinh[i].maThiSinh == maThiSinh) return i;
@@ -293,12 +133,10 @@ int timThiSinh(int maThiSinh) {
     return -1;
 }
 
-// Tim vi tri cau hoi theo ma cau hoi.
+// Tim vi tri cau hoi theo ma; tra ve -1 neu khong tim thay.
 int timCauHoi(int maCauHoi) {
     for (int i = 0; i < static_cast<int>(dsCauHoi.size()); i++) {
         if (dsCauHoi[i].maCauHoi == maCauHoi) return i;
     }
     return -1;
 }
-
-

@@ -1,5 +1,8 @@
 ﻿#include "ngan_hang_cau_hoi.h"
 
+#include <iomanip>
+
+// Sinh ma cau hoi moi bang cach lay ma cau hoi lon nhat hien co cong 1.
 int sinhMaCauHoiMoi() {
     int maLonNhat = 0;
     for (int i = 0; i < static_cast<int>(dsCauHoi.size()); i++) {
@@ -10,7 +13,7 @@ int sinhMaCauHoiMoi() {
     return maLonNhat + 1;
 }
 
-// Hien thi danh sach mon hoc/hoc phan.
+// Hien thi danh sach mon hoc/hoc phan de nguoi dung chon khi thao tac cau hoi.
 void hienThiMonHoc() {
     cout << "\nDANH SACH MON HOC\n";
     cout << left << setw(8) << "Ma" << setw(40) << "Ten mon hoc" << "\n";
@@ -20,7 +23,7 @@ void hienThiMonHoc() {
     }
 }
 
-// Hien thi cac cau hoi dang hoat dong cua mot mon hoc.
+// Hien thi tat ca cau hoi thuoc mon hoc ma nguoi dung chon.
 void hienThiCauHoiTheoMon() {
     hienThiMonHoc();
     int maMonHoc = nhapSo("Nhap ma mon hoc can xem: ", 1, 1000000);
@@ -45,7 +48,7 @@ void hienThiCauHoiTheoMon() {
     if (dem == 0) cout << "Khong co cau hoi cho mon nay.\n";
 }
 
-// Nhap va them mot cau hoi moi vao ngan hang cau hoi.
+// Nhap day du noi dung, 4 dap an, dap an dung, muc do roi them vao dsCauHoi.
 void themCauHoi() {
     CauHoi ch;
     hienThiMonHoc();
@@ -69,7 +72,7 @@ void themCauHoi() {
     cout << "Da them cau hoi moi, ma cau hoi = " << ch.maCauHoi << ".\n";
 }
 
-// Kiem tra cau hoi co dung mon hoc va dung loai de/kho hay khong.
+// Kiem tra cau hoi co dung mon hoc va dung loai de/kho de phuc vu cau hinh de thi.
 bool laCauHoiDungLoai(CauHoi ch, int maMonHoc, int loaiCauHoi) {
     if (ch.maMonHoc != maMonHoc) {
         return false;
@@ -82,7 +85,7 @@ bool laCauHoiDungLoai(CauHoi ch, int maMonHoc, int loaiCauHoi) {
     return ch.mucDo >= 2;
 }
 
-// Dem so cau hoi dang hoat dong theo mon hoc va muc do de/kho.
+// Dem so cau hoi theo mon hoc va muc do de/kho de biet co du cau hoi sinh de khong.
 int demCauHoiTheoMonVaLoai(int maMonHoc, int loaiCauHoi) {
     int dem = 0;
     for (int i = 0; i < static_cast<int>(dsCauHoi.size()); i++) {
@@ -93,7 +96,7 @@ int demCauHoiTheoMonVaLoai(int maMonHoc, int loaiCauHoi) {
     return dem;
 }
 
-// Dieu khien menu quan ly ngan hang cau hoi.
+// Dieu khien menu con cua ngan hang cau hoi va goi cac ham xu ly tuong ung.
 void menuNganHangCauHoi() {
     while (true) {
         cout << "\n===== NGAN HANG CAU HOI =====\n";
@@ -110,9 +113,4 @@ void menuNganHangCauHoi() {
         tamDung();
     }
 }
-
-// ==================================================
-// 8. THI: SINH DE, XAO TRON, TINH GIO
-// ==================================================
-
 

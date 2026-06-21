@@ -1,0 +1,42 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build thi trac nghiem",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-std=c++11",
+                "-Wall",
+                "-Wextra",
+                "main.cpp",
+                "tien_ich.cpp",
+                "du_lieu.cpp",
+                "ngan_hang_cau_hoi.cpp",
+                "thi.cpp",
+                "bao_cao.cpp",
+                "menu.cpp",
+                "-o",
+                "main.exe"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Run thi trac nghiem",
+            "type": "shell",
+            "command": ".\\main.exe",
+            "dependsOn": "Build thi trac nghiem",
+            "problemMatcher": [],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        }
+    ]
+}
